@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
+
 var converter = new showdown.Converter();
 converter.setOption('openLinksInNewWindow', true);
 
@@ -10,11 +11,10 @@ var Botkit = {
         ws_url: (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.host,
         reconnect_timeout: 3000,
         max_reconnect: 5,
-        enable_history: true,
+        enable_history: false,
     },
     options: {
         use_sockets: true,
-        enable_history: true,
     },
     reconnect_count: 0,
     guid: null,
@@ -58,10 +58,8 @@ var Botkit = {
             };
 
             xmlhttp.open("POST", url, true);
-            console.log("request", url, body);
             xmlhttp.setRequestHeader("Content-Type", "application/json");
             xmlhttp.send(JSON.stringify(body));
-
         });
 
     },
@@ -101,13 +99,10 @@ var Botkit = {
     },
     getHistory: function (guid) {
         var that = this;
-
-
         if (that.guid) {
             that.request('/botkit/history', {
                 user: that.guid
             }).then(function (history) {
-                
                 if (history.success) {
                     that.trigger('history_loaded', history.history);
                 } else {
@@ -120,7 +115,6 @@ var Botkit = {
     },
     webhook: function (message) {
         var that = this;
-
 
         that.request('/api/messages', message).then(function (messages) {
             messages.forEach((message) => {
@@ -153,6 +147,7 @@ var Botkit = {
     },
     connectWebhook: function () {
         var that = this;
+        var connectEvent = 'hello';
         if (Botkit.getCookie('botkit_guid')) {
             that.guid = Botkit.getCookie('botkit_guid');
             connectEvent = 'welcome_back';
@@ -265,7 +260,7 @@ var Botkit = {
         this.deliverMessage({
             type: 'trigger',
             user: this.guid,
-            channel: 'socket',
+            channel: this.options.use_sockets ? 'websocket' : 'webhook'
             script: script,
             thread: thread
         });
@@ -282,7 +277,7 @@ var Botkit = {
         this.deliverMessage({
             type: 'identify',
             user: this.guid,
-            channel: 'socket',
+            channel: this.options.use_sockets ? 'websocket' : 'webhook'
             user_profile: user,
         });
     },

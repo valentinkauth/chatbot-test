@@ -13,7 +13,7 @@ const { BotkitCMSHelper } = require('botkit-plugin-cms');
 const { WebAdapter } = require('botbuilder-adapter-web');
 
 const { MongoDbStorage } = require('botbuilder-storage-mongodb');
-const { BotFrameworkAdapter, ActivityTypes, ConversationState, UserState } = require('botbuilder');
+//const { BotFrameworkAdapter, ActivityTypes, ConversationState, UserState } = require('botbuilder');
 
 // Load process.env values from .env file
 require('dotenv').config();
@@ -22,26 +22,22 @@ let storage = null;
 if (process.env.MONGO_URI) {
     storage = mongoStorage = new MongoDbStorage({
         url : process.env.MONGO_URI,
+        // database: "test",
+        // collection: "botframework",
     });
 }
-
-const conversationState = new ConversationState(storage);
-const userState = new UserState(storage);
-
-console.log(conversationState);
-console.log(userState);
 
 
 const adapter = new WebAdapter({});
 
 
 const controller = new Botkit({
-    debug: true,
+    debug: false,
     webhook_uri: '/api/messages',
 
     adapter: adapter,
 
-    storage,
+    storage: storage,
 });
 
 if (process.env.cms_uri) {
@@ -56,6 +52,8 @@ controller.ready(() => {
 
     // load traditional developer-created local custom feature modules
     controller.loadModules(__dirname + '/features');
+
+    console.log(controller.storage)
 
     /* catch-all that uses the CMS to trigger dialogs */
     if (controller.plugins.cms) {

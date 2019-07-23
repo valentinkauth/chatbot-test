@@ -13,12 +13,6 @@ module.exports = function(controller) {
         await bot.reply(message, `Echo: ${ message.text }`);
     });
 
-    controller.on('welcome_back', async(bot, message) => {
-        await bot.reply(message, `Welcome Back sir!`);
-    });
-
-    controller.on('identify', async(bot, message) => {
-        await bot.reply(message, `Seems like I should identify you...`);
-    });
+  
 
 }

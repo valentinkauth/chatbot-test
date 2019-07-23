@@ -28,4 +28,16 @@ module.exports = function(controller) {
 
     }
 
+
+    // Greet user when websocket connection established successfully
+    controller.on('welcome_back', async(bot, message) => {
+        await bot.reply(message, `Welcome Back sir!`);
+    });
+
+    // React on identification event
+    controller.on('identify', async(bot, message) => {
+        await bot.reply(message, `Seems like I should identify you...`);
+    });
+
+
 }
