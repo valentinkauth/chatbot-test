@@ -18,6 +18,9 @@ const { MongoDbStorage } = require('botbuilder-storage-mongodb');
 // Load process.env values from .env file
 require('dotenv').config();
 
+const https = require('https');
+const fs = require('fs');
+
 let storage = null;
 if (process.env.MONGO_URI) {
     storage = mongoStorage = new MongoDbStorage({
@@ -28,7 +31,21 @@ if (process.env.MONGO_URI) {
 }
 
 
-const adapter = new WebAdapter({});
+// Tests for creating custom https server
+
+// var testServer = https.createServer({
+//     key: fs.readFileSync('./localhost.key'),
+//     cert: fs.readFileSync('./localhost.crt'),
+//     requestCert: true,
+//       rejectUnauthorized: false 
+//   }
+//   ).listen(443, 'localhost');
+
+//const adapter = new WebAdapter({server: testServer});
+
+
+
+const adapter = new WebAdapter({ port: '3001'});
 
 
 const controller = new Botkit({

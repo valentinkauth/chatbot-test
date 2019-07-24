@@ -9,7 +9,7 @@ module.exports = function(controller) {
         await bot.reply(message, 'I heard a sample message.');
     });
 
-    controller.on('message', async(bot, message) => {
+    controller.on('whoami', async(bot, message) => {
         await bot.reply(message, `Echo: ${ message.text }`);
     });
 
