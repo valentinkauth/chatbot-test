@@ -32,14 +32,7 @@ module.exports = function(controller) {
     // Greet user when websocket connection established successfully
     controller.on('welcome_back', async(bot, message) => {
 
-        await bot.reply(message, `Welcome Back sir!`);
-
-        // var trigger = true;
-
-        // if (trigger) {
-        //     console.log("herhskjhdsjk")
-        //     await bot.beginDialog('fragebogen_01');
-        // }
+        await bot.reply(message, `Willkommen zurück! (automatic response on websocket connect)`);
 
     });
 
@@ -47,6 +40,5 @@ module.exports = function(controller) {
     controller.on('identify', async(bot, message) => {
         await bot.reply(message, `Seems like I should identify you...`);
     });
-
 
 }
