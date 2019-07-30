@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questions>
+    <question main_title="TESTFRAGEBOGEN - Die folgenden Aussagen betreffen Ihr Wohlbefinden in den letzten zwei Wochen. Bitte markieren Sie bei jeder Aussage die Rubrik, die Ihrer Meinung nach am besten beschreibt, wie Sie sich in den letzten zwei Wochen gefühlt haben." category="Wohlbefinden"></question>
+    <question main_title="Im Folgenden werden Ihnen einige Fragen zu Ihrer Ernährung gestellt. Sie werden gefragt, wie oft Sie in den letzten 4 Wochen bestimmte Lebensmittel gegessen haben. Denken Sie dabei auch an Mahlzeiten, die Sie außer Haus (z.B. im Restaurant, in der Kantine) eingenommen haben. " category="Ernährung"></question>
+    <question main_title="" category="Bewegung"></question>
+    <question main_title="Als letztes wird Ihnen eine Frage zu Ihrem Gewicht gestellt.					
+" category="Gewicht">
+    </question>
+    <question number="1" name="Psy_G_01_t0" filter="" filter_ziel=""  category="Wohlbefinden">
+        <item>In den letzten 2 Wochen war ich froh und guter Laune.</item>
+        <answer_options state="single-choice">
+            <answer_option  code="0">zu keinem Zeitpunkt</answer_option>
+            <answer_option  code="1">ab und zu</answer_option>
+            <answer_option  code="2">etwas weniger als die Hälfte der Zeit</answer_option>
+            <answer_option  code="3">etwas mehr als die Hälfte der Zeit</answer_option>
+            <answer_option  code="4">meistens</answer_option>
+            <answer_option  code="5">die ganze Zeit</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+        </answer_options>
+    </question>
+    <question number="2" name="NT_01_t0" filter="6;0;1;2;3;4;5" filter_ziel="NT_1a_t0;NT_02_t0;NT_02_t0;NT_02_t0;NT_02_t0;NT_02_t0"  category="Ernährung">
+        <item>Folgen Sie einer bestimmten Ernährungsweise?</item>
+        <answer_options state="single-choice">
+            <answer_option  code="0">nein</answer_option>
+            <answer_option  code="1">ja, vegetarisch</answer_option>
+            <answer_option  code="2">ja, vegan</answer_option>
+            <answer_option  code="3">ja, low carb</answer_option>
+            <answer_option  code="4">ja, low fat</answer_option>
+            <answer_option  code="5">ja, Trennkost</answer_option>
+            <answer_option  code="6">ja, eine andere (Freitext)</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+        </answer_options>
+    </question>
+    <question number="3" name="NT_01a_t0" filter="" filter_ziel=""  category="Ernährung">
+        <item>Freitext spezielle Ernährungsform</item>
+        <answer_options state="freetext">
+            <answer_option  code="-95"></answer_option>
+        </answer_options>
+    </question>
+    <question number="4" name="NT_02_t0" filter="" filter_ziel=""  category="Ernährung">
+        <item>Wie oft haben Sie in den letzten 4 Wochen Milch (einschließlich Milch für Kaffee, Müsli) getrunken?</item>
+        <answer_options state="single-choice">
+            <answer_option  code="0">nie</answer_option>
+            <answer_option  code="1">1 Mal im Monat</answer_option>
+            <answer_option  code="2">2-3 Mal im Monat</answer_option>
+            <answer_option  code="3">1-2 Mal pro Woche</answer_option>
+            <answer_option  code="4">3-4 Mal pro Woche</answer_option>
+            <answer_option  code="5">5-6 Mal pro Woche</answer_option>
+            <answer_option  code="6">1 Mal am Tag</answer_option>
+            <answer_option  code="7">2 Mal am Tag</answer_option>
+            <answer_option  code="8">3 Mal am Tag</answer_option>
+            <answer_option  code="9">4-5 Mal am Tag</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+            <answer_option  code="10">öfter als 5 Mal am Tag</answer_option>
+        </answer_options>
+    </question>
+    <question number="5" name="NT_16_t0" filter="0;1;2;3;4;5;6;7;8;9;10" filter_ziel="NT_17_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0"  category="Ernährung">
+        <item>Wie oft haben Sie in den letzten 4 Wochen zuckerhaltige Erfrischungsgetränke getrunken (z.B. Cola, Limonade, Eistee, Malzbier, Energiegetränke, aromatisiertes Wasser)?</item>
+        <answer_options state="single-choice">
+            <answer_option  code="0">nie</answer_option>
+            <answer_option  code="1">1 Mal im Monat</answer_option>
+            <answer_option  code="2">2-3 Mal im Monat</answer_option>
+            <answer_option  code="3">1-2 Mal pro Woche</answer_option>
+            <answer_option  code="4">3-4 Mal pro Woche</answer_option>
+            <answer_option  code="5">5-6 Mal pro Woche</answer_option>
+            <answer_option  code="6">1 Mal am Tag</answer_option>
+            <answer_option  code="7">2 Mal am Tag</answer_option>
+            <answer_option  code="8">3 Mal am Tag</answer_option>
+            <answer_option  code="9">4-5 Mal am Tag</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+            <answer_option  code="10">öfter als 5 Mal am Tag</answer_option>
+        </answer_options>
+    </question>
+    <question number="6" name="NT_16a_t0" filter="" filter_ziel=""  category="Ernährung">
+        <item>Wenn Sie zuckerhaltige Erfrischungsgetränke trinken, wie viel trinken Sie davon meistens?</item>
+        <answer_options state="single-choice">
+            <answer_option  code="1">1/2 Glas (oder weniger)</answer_option>
+            <answer_option  code="2">1 Glas (200 ml)</answer_option>
+            <answer_option  code="3">2 Gläser</answer_option>
+            <answer_option  code="4">3 Gläser</answer_option>
+            <answer_option  code="5">4 Gläser (oder mehr)</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+        </answer_options>
+    </question>
+    <question number="7" name="NT_17_t0" filter="0;1;2;3;4;5;6;7;8;9;10" filter_ziel="NT_18_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0"  category="Ernährung">
+        <item>Wie oft haben Sie in den letzten 4 Wochen Fruchtsaft (z.B. Orangen-, Apfel-, Kirschsaft) getrunken? Gemeint ist auch verdünnter Fruchtsaft.</item>
+        <answer_options state="single-choice">
+            <answer_option  code="0">nie</answer_option>
+            <answer_option  code="1">1 Mal im Monat</answer_option>
+            <answer_option  code="2">2-3 Mal im Monat</answer_option>
+            <answer_option  code="3">1-2 Mal pro Woche</answer_option>
+            <answer_option  code="4">3-4 Mal pro Woche</answer_option>
+            <answer_option  code="5">5-6 Mal pro Woche</answer_option>
+            <answer_option  code="6">1 Mal am Tag</answer_option>
+            <answer_option  code="7">2 Mal am Tag</answer_option>
+            <answer_option  code="8">3 Mal am Tag</answer_option>
+            <answer_option  code="9">4-5 Mal am Tag</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+            <answer_option  code="10">öfter als 5 Mal am Tag</answer_option>
+        </answer_options>
+    </question>
+    <question number="8" name="NT_17a_t0" filter="" filter_ziel=""  category="Ernährung">
+        <item>Wenn Sie Fruchtsaft trinken, wie viel trinken Sie davon meistens?</item>
+        <answer_options state="single-choice">
+            <answer_option  code="1">1/2 Glas (oder weniger)</answer_option>
+            <answer_option  code="2">1 Glas (200 ml)</answer_option>
+            <answer_option  code="3">2 Gläser</answer_option>
+            <answer_option  code="4">3 Gläser</answer_option>
+            <answer_option  code="5">4 Gläser (oder mehr)</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+        </answer_options>
+    </question>
+    <question number="9" name="NT_18_t0" filter="" filter_ziel=""  category="Ernährung">
+        <item>Wie oft haben Sie in den letzten 4 Wochen Wasser (Leitungswasser, Mineralwasser) getrunken?</item>
+        <answer_options state="single-choice">
+            <answer_option  code="0">nie</answer_option>
+            <answer_option  code="1">1 Mal im Monat</answer_option>
+            <answer_option  code="2">2-3 Mal im Monat</answer_option>
+            <answer_option  code="3">1-2 Mal pro Woche</answer_option>
+            <answer_option  code="4">3-4 Mal pro Woche</answer_option>
+            <answer_option  code="5">5-6 Mal pro Woche</answer_option>
+            <answer_option  code="6">1 Mal am Tag</answer_option>
+            <answer_option  code="7">2 Mal am Tag</answer_option>
+            <answer_option  code="8">3 Mal am Tag</answer_option>
+            <answer_option  code="9">4-5 Mal am Tag</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+            <answer_option  code="10">öfter als 5 Mal am Tag</answer_option>
+        </answer_options>
+    </question>
+    <question number="10" name="PA_03a_t0" filter="0" filter_ziel="PA_04a_t0"  category="Bewegung">
+        <item>An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Zu Fuß zur Arbeit gehen (auch längere Teilstrecken)</item>
+        <answer_options state="single-choice">
+            <answer_option  code="0">nicht gemacht</answer_option>
+            <answer_option  code="-96">an # Tagen während der 4 Wochen</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+        </answer_options>
+    </question>
+    <question number="11" name="PA_03b_t0" filter="" filter_ziel=""  category="Bewegung">
+        <item>An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Zu Fuß zur Arbeit gehen (auch längere Teilstrecken)</item>
+        <answer_options state="single-choice">
+            <answer_option  code="-96">ca. # Minuten pro Tag</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten</answer_option>
+        </answer_options>
+    </question>
+    <question number="12" name="PA_13a_t0" filter="" filter_ziel=""  category="Bewegung">
+        <item>An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Um welche sportliche Aktivität handelt es sich dabei?</item>
+        <answer_options state="freetext">
+            <answer_option  code="-95"></answer_option>
+        </answer_options>
+    </question>
+    <question number="13" name="PA_13b_t0" filter="" filter_ziel=""  category="Bewegung">
+        <item>An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Aktivität A habe ich in den letzten 4 Wochen ca.</item>
+        <answer_options state="int">
+            <answer_option  code="-96"># Mal ausgeübt</answer_option>
+        </answer_options>
+    </question>
+    <question number="14" name="PA_13c_t0" filter="" filter_ziel=""  category="Bewegung">
+        <item>An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? und zwar bei jedem Mal für </item>
+        <answer_options state="int">
+            <answer_option  code="-96">ca. # Minuten</answer_option>
+        </answer_options>
+    </question>
+    <question number="15" name="GW_01_t2" filter="" filter_ziel=""  category="Gewicht">
+        <item>Wie viel wiegen Sie derzeit?</item>
+        <answer_options state="single-choice">
+            <answer_option  code="-94"># in kg</answer_option>
+            <answer_option  code="-99">Diese Frage möchte ich nicht beantworten.</answer_option>
+        </answer_options>
+    </question>
+    <question number="16" name="GW_02_t2" filter="" filter_ziel=""  category="Gewicht">
+        <item>Wie viel Kg wiegt ihr Kühlschrank?</item>
+        <answer_options state="float">
+            <answer_option  code="-94"># in kg</answer_option>
+        </answer_options>
+    </question>
+</questions>

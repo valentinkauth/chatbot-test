@@ -51,7 +51,9 @@ module.exports = function (controller) {
   }, [], 'answer_f1_a1')
 
 
-  // TODO: ask question 2 and store reply in variable answer_f1_a2
+
+  for (i = 0; i < 3; i++) { 
+    // TODO: ask question 2 and store reply in variable answer_f1_a2
   convo.ask({
     text: "Das ist Frage 2",
 
@@ -65,6 +67,9 @@ module.exports = function (controller) {
       title: 'Antwort 3 zu Frage 2', payload: '3'
     }]
   }, [], 'answer_f1_a2')
+  }
+
+  
 
 
   convo.ask({

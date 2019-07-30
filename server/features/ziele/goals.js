@@ -18,7 +18,7 @@ module.exports = function(controller) {
     // TODO: load user data
     
     // set user name
-    convo.setrVar('user_name', 'Valentin')
+    convo.setVar('user_name', 'Valentin')
 
     // set goals
     convo.setVar('goal', '3-mal die Woche laufen gehen für mindestens 30 Minuten');
