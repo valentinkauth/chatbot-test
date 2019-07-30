@@ -5,7 +5,7 @@
 // This is the main file for the GeMuKiBot bot.
 
 // Import Botkit's core features
-const { Botkit } = require('botkit');
+const { Botkit, BotkitConversation } = require('botkit');
 const { BotkitCMSHelper } = require('botkit-plugin-cms');
 
 // Import a platform-specific adapter for web.
@@ -45,11 +45,11 @@ if (process.env.MONGO_URI) {
 
 
 
-const adapter = new WebAdapter({ port: '3001'});
+const adapter = new WebAdapter({});
 
 
 const controller = new Botkit({
-    debug: false,
+    debug: true,
     webhook_uri: '/api/messages',
 
     adapter: adapter,
@@ -69,6 +69,7 @@ controller.ready(() => {
 
     // load traditional developer-created local custom feature modules
     controller.loadModules(__dirname + '/features');
+    controller.loadModules(__dirname + '/features/frageboegen');
 
     console.log(controller.storage)
 

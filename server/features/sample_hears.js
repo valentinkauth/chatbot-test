@@ -19,9 +19,14 @@ module.exports = function(controller) {
         await bot.reply(message,{ text: 'I HEARD ALL CAPS!' });
     });
 
-
+    // reply with user id
     controller.hears('whoami','message', async(bot, message) => {
         await bot.reply(message, `You are ${ message.user }`);
+    });
+
+    // reply with user id
+    controller.hears('f','message', async(bot, message) => {
+        await bot.beginDialog('fragebogen_01');
     });
 
 }
