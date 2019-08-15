@@ -13,7 +13,6 @@ const { BotkitCMSHelper } = require('botkit-plugin-cms');
 const { WebAdapter } = require('botbuilder-adapter-web');
 
 const { MongoDbStorage } = require('botbuilder-storage-mongodb');
-//const { BotFrameworkAdapter, ActivityTypes, ConversationState, UserState } = require('botbuilder');
 
 // Load process.env values from .env file
 require('dotenv').config();
@@ -25,8 +24,8 @@ let storage = null;
 if (process.env.MONGO_URI) {
     storage = mongoStorage = new MongoDbStorage({
         url : process.env.MONGO_URI,
-        // database: "test",
-        // collection: "botframework",
+        database: "GeMuKi",
+        collection: "gemuki",
     });
 }
 
@@ -73,7 +72,6 @@ controller.ready(() => {
     controller.loadModules(__dirname + '/features/frageboegen');
     // controller.loadModules(__dirname + '/features/ziele');
     
-    console.log(controller.storage)
 
     /* catch-all that uses the CMS to trigger dialogs */
     if (controller.plugins.cms) {

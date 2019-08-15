@@ -20,7 +20,85 @@ module.exports = function (controller) {
 
   // send greeting
   // TODO: create variatons in greeting
-  convo.say("Hallo {{ vars.user_name }}, willkommen zurück!.");
+  convo.say("Hallo {{ vars.user_name }}, willkommen zurück!");
+
+  convo.say('Whats up?')
+
+  convo.addAction('q1')
+
+
+  convo.addQuestion({
+    text: "Das ist die optionale Frage",
+
+    quick_replies: [{
+      title: 'Antwort 1 ', payload: '1'
+    },
+    {
+      title: 'Antwort 2', payload: '2'
+    },]
+  }, [
+      {
+        default: true,
+        handler: async (response, convo, bot) => {
+          await convo.gotoThread('q2');
+        }
+      }
+    ], 'frage_optional', 'frage_optional');
+
+
+  // do a simple conditional branch looking for user to say "no"
+  convo.addQuestion({
+    text: "Das ist Frage 1",
+
+    quick_replies: [{
+      title: 'Antwort 1 zu Frage 1', payload: '1'
+    },
+    {
+      title: 'Antwort 2 zu Frage 1', payload: '2'
+    },
+    {
+      title: 'Gehe zur optionalen Frage', payload: '3'
+    }]
+  }, [
+      {
+        pattern: '3',
+        handler: async (response, convo, bot) => {
+          // if user says no, go back to favorite color.
+          await convo.gotoThread('frage_optional');
+        }
+      },
+      {
+        default: true,
+        handler: async (response, convo, bot) => {
+          await convo.gotoThread('q2');
+        }
+      }
+    ], 'frage1', 'q1');
+
+
+    convo.addQuestion({
+      text: "Das ist Frage 2",
+  
+      quick_replies: [{
+        title: 'Antwort 1 zu Frage 2', payload: '1'
+      },
+      {
+        title: 'Antwort 2 zu Frage 2', payload: '2'
+      },
+      {
+        title: 'Antowrt 3 zu Frage 2', payload: '3'
+      }]
+    }, [
+        {
+          default: true,
+          handler: async (response, convo, bot) => {
+            // End conversation
+          }
+        }
+      ], 'frage2', 'q2');
+
+
+
 
 
   // log all variables when dialog is completed

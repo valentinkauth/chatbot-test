@@ -2,564 +2,566 @@
 	"questions": {
 		"question": [
 			{
-				"_main_title": "TESTFRAGEBOGEN - Die folgenden Aussagen betreffen Ihr Wohlbefinden in den letzten zwei Wochen. Bitte markieren Sie bei jeder Aussage die Rubrik, die Ihrer Meinung nach am besten beschreibt, wie Sie sich in den letzten zwei Wochen gefühlt haben.",
-				"_category": "Wohlbefinden"
+				"main_title": "TESTFRAGEBOGEN - Die folgenden Aussagen betreffen Dein Wohlbefinden in den letzten zwei Wochen. Bitte markiere bei jeder Aussage die Rubrik, die Deiner Meinung nach am besten beschreibt, wie Du dich in den letzten zwei Wochen gefühlt hast.",
+				"category": "Wohlbefinden"
 			},
 			{
-				"_main_title": "Im Folgenden werden Ihnen einige Fragen zu Ihrer Ernährung gestellt. Sie werden gefragt, wie oft Sie in den letzten 4 Wochen bestimmte Lebensmittel gegessen haben. Denken Sie dabei auch an Mahlzeiten, die Sie außer Haus (z.B. im Restaurant, in der Kantine) eingenommen haben. ",
-				"_category": "Ernährung"
+				"main_title": "Im Folgenden werden Dir einige Fragen zu Deiner Ernährung gestellt. Du wirst gefragt, wie oft Du in den letzten 4 Wochen bestimmte Lebensmittel gegessen hast. Denke dabei auch an Mahlzeiten, die Du außer Haus (z.B. im Restaurant, in der Kantine) eingenommen hast. ",
+				"category": "Ernährung"
 			},
 			{
-				"_main_title": "",
-				"_category": "Bewegung"
+				"main_title": "Nun kommen ein paar Fragen zur Bewegung.",
+				"category": "Bewegung"
 			},
 			{
-				"_main_title": "Als letztes wird Ihnen eine Frage zu Ihrem Gewicht gestellt.      ",
-				"_category": "Gewicht"
+				"main_title": "Als letztes wird Dir eine Frage zu Deinem Gewicht gestellt.",
+				"category": "Gewicht"
 			},
 			{
 				"item": "In den letzten 2 Wochen war ich froh und guter Laune.",
 				"answer_options": {
 					"answer_option": [
 						{
-							"_code": "0",
-							"__text": "zu keinem Zeitpunkt"
+							"code": "0",
+							"text": "zu keinem Zeitpunkt"
 						},
 						{
-							"_code": "1",
-							"__text": "ab und zu"
+							"code": "1",
+							"text": "ab und zu"
 						},
 						{
-							"_code": "2",
-							"__text": "etwas weniger als die Hälfte der Zeit"
+							"code": "2",
+							"text": "etwas weniger als die Hälfte der Zeit"
 						},
 						{
-							"_code": "3",
-							"__text": "etwas mehr als die Hälfte der Zeit"
+							"code": "3",
+							"text": "etwas mehr als die Hälfte der Zeit"
 						},
 						{
-							"_code": "4",
-							"__text": "meistens"
+							"code": "4",
+							"text": "meistens"
 						},
 						{
-							"_code": "5",
-							"__text": "die ganze Zeit"
+							"code": "5",
+							"text": "die ganze Zeit"
 						},
 						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
 						}
 					],
-					"_state": "single-choice"
+					"state": "single-choice"
 				},
-				"_number": "1",
-				"_name": "Psy_G_01_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Wohlbefinden"
+				"number": "1",
+				"name": "Psy_G_01_t0",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Wohlbefinden"
 			},
 			{
-				"item": "Folgen Sie einer bestimmten Ernährungsweise?",
+				"item": "Folgst Du einer bestimmten Ernährungsweise?",
 				"answer_options": {
 					"answer_option": [
 						{
-							"_code": "0",
-							"__text": "nein"
+							"code": "0",
+							"text": "nein"
 						},
 						{
-							"_code": "1",
-							"__text": "ja, vegetarisch"
+							"code": "1",
+							"text": "ja, vegetarisch"
 						},
 						{
-							"_code": "2",
-							"__text": "ja, vegan"
+							"code": "2",
+							"text": "ja, vegan"
 						},
 						{
-							"_code": "3",
-							"__text": "ja, low carb"
+							"code": "3",
+							"text": "ja, low carb"
 						},
 						{
-							"_code": "4",
-							"__text": "ja, low fat"
+							"code": "4",
+							"text": "ja, low fat"
 						},
 						{
-							"_code": "5",
-							"__text": "ja, Trennkost"
+							"code": "5",
+							"text": "ja, Trennkost"
 						},
 						{
-							"_code": "6",
-							"__text": "ja, eine andere (Freitext)"
+							"code": "6",
+							"text": "ja, eine andere (Freitext)",
+							"optional_questions": [{
+								"item": "Um welche Ernährungsform handelt es sich?",
+								"answer_options": {
+									"answer_option": {
+										"code": "-95"
+									},
+									"state": "freetext"
+								},
+								"number": "3",
+								"name": "NT_01a_t0",
+								"filter": "",
+								"filter_ziel": "",
+								"category": "Ernährung"
+							}]
 						},
 						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
 						}
 					],
-					"_state": "single-choice"
+					"state": "single-choice"
 				},
-				"_number": "2",
-				"_name": "NT_01_t0",
-				"_filter": "6;0;1;2;3;4;5",
-				"_filter_ziel": "NT_1a_t0;NT_02_t0;NT_02_t0;NT_02_t0;NT_02_t0;NT_02_t0",
-				"_category": "Ernährung"
+				"number": "2",
+				"name": "NT_01_t0",
+				"filter": "6;0;1;2;3;4;5",
+				"filter_ziel": "NT_1a_t0;NT_02_t0;NT_02_t0;NT_02_t0;NT_02_t0;NT_02_t0",
+				"category": "Ernährung"
 			},
 			{
-				"item": "Freitext spezielle Ernährungsform",
-				"answer_options": {
-					"answer_option": {
-						"_code": "-95"
-					},
-					"_state": "freetext"
-				},
-				"_number": "3",
-				"_name": "NT_01a_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Ernährung"
-			},
-			{
-				"item": "Wie oft haben Sie in den letzten 4 Wochen Milch (einschließlich Milch für Kaffee, Müsli) getrunken?",
-				"answer_options": {
-					"answer_option": [
-						{
-							"_code": "0",
-							"__text": "nie"
-						},
-						{
-							"_code": "1",
-							"__text": "1 Mal im Monat"
-						},
-						{
-							"_code": "2",
-							"__text": "2-3 Mal im Monat"
-						},
-						{
-							"_code": "3",
-							"__text": "1-2 Mal pro Woche"
-						},
-						{
-							"_code": "4",
-							"__text": "3-4 Mal pro Woche"
-						},
-						{
-							"_code": "5",
-							"__text": "5-6 Mal pro Woche"
-						},
-						{
-							"_code": "6",
-							"__text": "1 Mal am Tag"
-						},
-						{
-							"_code": "7",
-							"__text": "2 Mal am Tag"
-						},
-						{
-							"_code": "8",
-							"__text": "3 Mal am Tag"
-						},
-						{
-							"_code": "9",
-							"__text": "4-5 Mal am Tag"
-						},
-						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
-						},
-						{
-							"_code": "10",
-							"__text": "öfter als 5 Mal am Tag"
-						}
-					],
-					"_state": "single-choice"
-				},
-				"_number": "4",
-				"_name": "NT_02_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Ernährung"
-			},
-			{
-				"item": "Wie oft haben Sie in den letzten 4 Wochen zuckerhaltige Erfrischungsgetränke getrunken (z.B. Cola, Limonade, Eistee, Malzbier, Energiegetränke, aromatisiertes Wasser)?",
+				"item": "Wie oft hast Du in den letzten 4 Wochen Milch (einschließlich Milch für Kaffee, Müsli) getrunken?",
 				"answer_options": {
 					"answer_option": [
 						{
-							"_code": "0",
-							"__text": "nie"
+							"code": "0",
+							"text": "nie"
 						},
 						{
-							"_code": "1",
-							"__text": "1 Mal im Monat"
+							"code": "1",
+							"text": "1 Mal im Monat"
 						},
 						{
-							"_code": "2",
-							"__text": "2-3 Mal im Monat"
+							"code": "2",
+							"text": "2-3 Mal im Monat"
 						},
 						{
-							"_code": "3",
-							"__text": "1-2 Mal pro Woche"
+							"code": "3",
+							"text": "1-2 Mal pro Woche"
 						},
 						{
-							"_code": "4",
-							"__text": "3-4 Mal pro Woche"
+							"code": "4",
+							"text": "3-4 Mal pro Woche"
 						},
 						{
-							"_code": "5",
-							"__text": "5-6 Mal pro Woche"
+							"code": "5",
+							"text": "5-6 Mal pro Woche"
 						},
 						{
-							"_code": "6",
-							"__text": "1 Mal am Tag"
+							"code": "6",
+							"text": "1 Mal am Tag"
 						},
 						{
-							"_code": "7",
-							"__text": "2 Mal am Tag"
+							"code": "7",
+							"text": "2 Mal am Tag"
 						},
 						{
-							"_code": "8",
-							"__text": "3 Mal am Tag"
+							"code": "8",
+							"text": "3 Mal am Tag"
 						},
 						{
-							"_code": "9",
-							"__text": "4-5 Mal am Tag"
+							"code": "9",
+							"text": "4-5 Mal am Tag"
 						},
 						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
 						},
 						{
-							"_code": "10",
-							"__text": "öfter als 5 Mal am Tag"
+							"code": "10",
+							"text": "öfter als 5 Mal am Tag"
 						}
 					],
-					"_state": "single-choice"
+					"state": "single-choice"
 				},
-				"_number": "5",
-				"_name": "NT_16_t0",
-				"_filter": "0;1;2;3;4;5;6;7;8;9;10",
-				"_filter_ziel": "NT_17_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0",
-				"_category": "Ernährung"
+				"number": "4",
+				"name": "NT_02_t0",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Ernährung"
 			},
 			{
-				"item": "Wenn Sie zuckerhaltige Erfrischungsgetränke trinken, wie viel trinken Sie davon meistens?",
+				"item": "Wie oft hast Du in den letzten 4 Wochen zuckerhaltige Erfrischungsgetränke getrunken (z.B. Cola, Limonade, Eistee, Malzbier, Energiegetränke, aromatisiertes Wasser)?",
 				"answer_options": {
 					"answer_option": [
 						{
-							"_code": "1",
-							"__text": "1/2 Glas (oder weniger)"
+							"code": "0",
+							"text": "nie"
 						},
 						{
-							"_code": "2",
-							"__text": "1 Glas (200 ml)"
+							"code": "1",
+							"text": "1 Mal im Monat"
 						},
 						{
-							"_code": "3",
-							"__text": "2 Gläser"
+							"code": "2",
+							"text": "2-3 Mal im Monat"
 						},
 						{
-							"_code": "4",
-							"__text": "3 Gläser"
+							"code": "3",
+							"text": "1-2 Mal pro Woche"
 						},
 						{
-							"_code": "5",
-							"__text": "4 Gläser (oder mehr)"
+							"code": "4",
+							"text": "3-4 Mal pro Woche"
 						},
 						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
+							"code": "5",
+							"text": "5-6 Mal pro Woche"
+						},
+						{
+							"code": "6",
+							"text": "1 Mal am Tag"
+						},
+						{
+							"code": "7",
+							"text": "2 Mal am Tag"
+						},
+						{
+							"code": "8",
+							"text": "3 Mal am Tag"
+						},
+						{
+							"code": "9",
+							"text": "4-5 Mal am Tag"
+						},
+						{
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
+						},
+						{
+							"code": "10",
+							"text": "öfter als 5 Mal am Tag"
 						}
 					],
-					"_state": "single-choice"
+					"state": "single-choice"
 				},
-				"_number": "6",
-				"_name": "NT_16a_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Ernährung"
+				"number": "5",
+				"name": "NT_16_t0",
+				"filter": "0;1;2;3;4;5;6;7;8;9;10",
+				"filter_ziel": "NT_17_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0;NT_16a_t0",
+				"category": "Ernährung"
 			},
 			{
-				"item": "Wie oft haben Sie in den letzten 4 Wochen Fruchtsaft (z.B. Orangen-, Apfel-, Kirschsaft) getrunken? Gemeint ist auch verdünnter Fruchtsaft.",
+				"item": "Wenn Du zuckerhaltige Erfrischungsgetränke trinkst, wie viel trinkst Du davon meistens?",
 				"answer_options": {
 					"answer_option": [
 						{
-							"_code": "0",
-							"__text": "nie"
+							"code": "1",
+							"text": "1/2 Glas (oder weniger)"
 						},
 						{
-							"_code": "1",
-							"__text": "1 Mal im Monat"
+							"code": "2",
+							"text": "1 Glas (200 ml)"
 						},
 						{
-							"_code": "2",
-							"__text": "2-3 Mal im Monat"
+							"code": "3",
+							"text": "2 Gläser"
 						},
 						{
-							"_code": "3",
-							"__text": "1-2 Mal pro Woche"
+							"code": "4",
+							"text": "3 Gläser"
 						},
 						{
-							"_code": "4",
-							"__text": "3-4 Mal pro Woche"
+							"code": "5",
+							"text": "4 Gläser (oder mehr)"
 						},
 						{
-							"_code": "5",
-							"__text": "5-6 Mal pro Woche"
-						},
-						{
-							"_code": "6",
-							"__text": "1 Mal am Tag"
-						},
-						{
-							"_code": "7",
-							"__text": "2 Mal am Tag"
-						},
-						{
-							"_code": "8",
-							"__text": "3 Mal am Tag"
-						},
-						{
-							"_code": "9",
-							"__text": "4-5 Mal am Tag"
-						},
-						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
-						},
-						{
-							"_code": "10",
-							"__text": "öfter als 5 Mal am Tag"
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
 						}
 					],
-					"_state": "single-choice"
+					"state": "single-choice"
 				},
-				"_number": "7",
-				"_name": "NT_17_t0",
-				"_filter": "0;1;2;3;4;5;6;7;8;9;10",
-				"_filter_ziel": "NT_18_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0",
-				"_category": "Ernährung"
+				"number": "6",
+				"name": "NT_16a_t0",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Ernährung"
 			},
 			{
-				"item": "Wenn Sie Fruchtsaft trinken, wie viel trinken Sie davon meistens?",
+				"item": "Wie oft hast Du in den letzten 4 Wochen Fruchtsaft (z.B. Orangen-, Apfel-, Kirschsaft) getrunken? Gemeint ist auch verdünnter Fruchtsaft.",
 				"answer_options": {
 					"answer_option": [
 						{
-							"_code": "1",
-							"__text": "1/2 Glas (oder weniger)"
+							"code": "0",
+							"text": "nie"
 						},
 						{
-							"_code": "2",
-							"__text": "1 Glas (200 ml)"
+							"code": "1",
+							"text": "1 Mal im Monat"
 						},
 						{
-							"_code": "3",
-							"__text": "2 Gläser"
+							"code": "2",
+							"text": "2-3 Mal im Monat"
 						},
 						{
-							"_code": "4",
-							"__text": "3 Gläser"
+							"code": "3",
+							"text": "1-2 Mal pro Woche"
 						},
 						{
-							"_code": "5",
-							"__text": "4 Gläser (oder mehr)"
+							"code": "4",
+							"text": "3-4 Mal pro Woche"
 						},
 						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
+							"code": "5",
+							"text": "5-6 Mal pro Woche"
+						},
+						{
+							"code": "6",
+							"text": "1 Mal am Tag"
+						},
+						{
+							"code": "7",
+							"text": "2 Mal am Tag"
+						},
+						{
+							"code": "8",
+							"text": "3 Mal am Tag"
+						},
+						{
+							"code": "9",
+							"text": "4-5 Mal am Tag"
+						},
+						{
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
+						},
+						{
+							"code": "10",
+							"text": "öfter als 5 Mal am Tag"
 						}
 					],
-					"_state": "single-choice"
+					"state": "single-choice"
 				},
-				"_number": "8",
-				"_name": "NT_17a_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Ernährung"
+				"number": "7",
+				"name": "NT_17_t0",
+				"filter": "0;1;2;3;4;5;6;7;8;9;10",
+				"filter_ziel": "NT_18_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0;NT_17a_t0",
+				"category": "Ernährung"
 			},
 			{
-				"item": "Wie oft haben Sie in den letzten 4 Wochen Wasser (Leitungswasser, Mineralwasser) getrunken?",
+				"item": "Wenn Du Fruchtsaft trinkst, wie viel trinkst Du davon meistens?",
 				"answer_options": {
 					"answer_option": [
 						{
-							"_code": "0",
-							"__text": "nie"
+							"code": "1",
+							"text": "1/2 Glas (oder weniger)"
 						},
 						{
-							"_code": "1",
-							"__text": "1 Mal im Monat"
+							"code": "2",
+							"text": "1 Glas (200 ml)"
 						},
 						{
-							"_code": "2",
-							"__text": "2-3 Mal im Monat"
+							"code": "3",
+							"text": "2 Gläser"
 						},
 						{
-							"_code": "3",
-							"__text": "1-2 Mal pro Woche"
+							"code": "4",
+							"text": "3 Gläser"
 						},
 						{
-							"_code": "4",
-							"__text": "3-4 Mal pro Woche"
+							"code": "5",
+							"text": "4 Gläser (oder mehr)"
 						},
 						{
-							"_code": "5",
-							"__text": "5-6 Mal pro Woche"
-						},
-						{
-							"_code": "6",
-							"__text": "1 Mal am Tag"
-						},
-						{
-							"_code": "7",
-							"__text": "2 Mal am Tag"
-						},
-						{
-							"_code": "8",
-							"__text": "3 Mal am Tag"
-						},
-						{
-							"_code": "9",
-							"__text": "4-5 Mal am Tag"
-						},
-						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
-						},
-						{
-							"_code": "10",
-							"__text": "öfter als 5 Mal am Tag"
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
 						}
 					],
-					"_state": "single-choice"
+					"state": "single-choice"
 				},
-				"_number": "9",
-				"_name": "NT_18_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Ernährung"
+				"number": "8",
+				"name": "NT_17a_t0",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Ernährung"
+			},
+			{
+				"item": "Wie oft hast Du in den letzten 4 Wochen Wasser (Leitungswasser, Mineralwasser) getrunken?",
+				"answer_options": {
+					"answer_option": [
+						{
+							"code": "0",
+							"text": "nie"
+						},
+						{
+							"code": "1",
+							"text": "1 Mal im Monat"
+						},
+						{
+							"code": "2",
+							"text": "2-3 Mal im Monat"
+						},
+						{
+							"code": "3",
+							"text": "1-2 Mal pro Woche"
+						},
+						{
+							"code": "4",
+							"text": "3-4 Mal pro Woche"
+						},
+						{
+							"code": "5",
+							"text": "5-6 Mal pro Woche"
+						},
+						{
+							"code": "6",
+							"text": "1 Mal am Tag"
+						},
+						{
+							"code": "7",
+							"text": "2 Mal am Tag"
+						},
+						{
+							"code": "8",
+							"text": "3 Mal am Tag"
+						},
+						{
+							"code": "9",
+							"text": "4-5 Mal am Tag"
+						},
+						{
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
+						},
+						{
+							"code": "10",
+							"text": "öfter als 5 Mal am Tag"
+						}
+					],
+					"state": "single-choice"
+				},
+				"number": "9",
+				"name": "NT_18_t0",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Ernährung"
+			},
+			{
+				"item": "An wie vielen Tagen in der Woche und wie lange hast Du die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Zu Fuß zur Arbeit gehen (auch längere Teilstrecken)",
+				"answer_options": {
+					"answer_option": [
+						{
+							"code": "0",
+							"text": "nicht gemacht"
+						},
+						{
+							"code": "-96",
+							"text": "Ich  möchte die Werte manuell eingeben",
+							"optional_questions": []
+						},
+						{
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
+						}
+					],
+					"state": "single-choice"
+				},
+				"number": "10",
+				"name": "PA_03a_t0",
+				"filter": "0",
+				"filter_ziel": "PA_04a_t0",
+				"category": "Bewegung"
 			},
 			{
 				"item": "An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Zu Fuß zur Arbeit gehen (auch längere Teilstrecken)",
 				"answer_options": {
 					"answer_option": [
 						{
-							"_code": "0",
-							"__text": "nicht gemacht"
+							"code": "-96",
+							"text": "ca. # Minuten pro Tag"
 						},
 						{
-							"_code": "-96",
-							"__text": "an # Tagen während der 4 Wochen"
-						},
-						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten"
 						}
 					],
-					"_state": "single-choice"
+					"state": "single-choice"
 				},
-				"_number": "10",
-				"_name": "PA_03a_t0",
-				"_filter": "0",
-				"_filter_ziel": "PA_04a_t0",
-				"_category": "Bewegung"
-			},
-			{
-				"item": "An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Zu Fuß zur Arbeit gehen (auch längere Teilstrecken)",
-				"answer_options": {
-					"answer_option": [
-						{
-							"_code": "-96",
-							"__text": "ca. # Minuten pro Tag"
-						},
-						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten"
-						}
-					],
-					"_state": "single-choice"
-				},
-				"_number": "11",
-				"_name": "PA_03b_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Bewegung"
+				"number": "11",
+				"name": "PA_03b_t0",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Bewegung"
 			},
 			{
 				"item": "An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Um welche sportliche Aktivität handelt es sich dabei?",
 				"answer_options": {
-					"answer_option": {
-						"_code": "-95"
-					},
-					"_state": "freetext"
+					"answer_option": [{
+						"code": "-95",
+						"text": "# mal die Woche "
+					}],
+					"state": "freetext"
 				},
-				"_number": "12",
-				"_name": "PA_13a_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Bewegung"
+				"number": "12",
+				"name": "PA_13a_t0",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Bewegung"
 			},
 			{
 				"item": "An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Aktivität A habe ich in den letzten 4 Wochen ca.",
 				"answer_options": {
-					"answer_option": {
-						"_code": "-96",
-						"__text": "# Mal ausgeübt"
-					},
-					"_state": "int"
+					"answer_option": [{
+						"code": "-96",
+						"text": "# Mal ausgeübt"
+					}],
+					"state": "int"
 				},
-				"_number": "13",
-				"_name": "PA_13b_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Bewegung"
+				"number": "13",
+				"name": "PA_13b_t0",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Bewegung"
 			},
 			{
 				"item": "An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? und zwar bei jedem Mal für",
 				"answer_options": {
-					"answer_option": {
-						"_code": "-96",
-						"__text": "ca. # Minuten"
-					},
-					"_state": "int"
+					"answer_option": [{
+						"code": "-96",
+						"text": "ca. # Minuten"
+					}],
+					"state": "int"
 				},
-				"_number": "14",
-				"_name": "PA_13c_t0",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Bewegung"
+				"number": "14",
+				"name": "PA_13c_t0",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Bewegung"
 			},
 			{
 				"item": "Wie viel wiegen Sie derzeit?",
 				"answer_options": {
 					"answer_option": [
 						{
-							"_code": "-94",
-							"__text": "# in kg"
+							"code": "-94",
+							"text": "# in kg"
 						},
 						{
-							"_code": "-99",
-							"__text": "Diese Frage möchte ich nicht beantworten."
+							"code": "-99",
+							"text": "Diese Frage möchte ich nicht beantworten."
 						}
 					],
-					"_state": "single-choice"
+					"state": "single-choice"
 				},
-				"_number": "15",
-				"_name": "GW_01_t2",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Gewicht"
+				"number": "15",
+				"name": "GW_01_t2",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Gewicht"
 			},
 			{
 				"item": "Wie viel Kg wiegt ihr Kühlschrank?",
 				"answer_options": {
-					"answer_option": {
-						"_code": "-94",
-						"__text": "# in kg"
-					},
-					"_state": "float"
+					"answer_option": [{
+						"code": "-94",
+						"text": "# in kg"
+					}],
+					"state": "float"
 				},
-				"_number": "16",
-				"_name": "GW_02_t2",
-				"_filter": "",
-				"_filter_ziel": "",
-				"_category": "Gewicht"
+				"number": "16",
+				"name": "GW_02_t2",
+				"filter": "",
+				"filter_ziel": "",
+				"category": "Gewicht"
 			}
 		]
 	}

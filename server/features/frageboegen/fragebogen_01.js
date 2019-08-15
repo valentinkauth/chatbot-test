@@ -51,25 +51,46 @@ module.exports = function (controller) {
   }, [], 'answer_f1_a1')
 
 
+  // ask a question, evaluate answer, take conditional action based on response
+  convo.ask('Do you want to eat a taco?', [
+    {
+      pattern: 'yes',
+      type: 'string',
+    },
+    {
+      pattern: 'no',
+      type: 'string',
+    }, 
+   {
+      default: true,
+      handler: async (response, convo, bot) => {
+        await bot.say('I do not understand your response!');
+        // start over!
+        return await convo.repeat();
+      }
+    }
+  ], 'tacos');
 
-  for (i = 0; i < 3; i++) { 
+
+
+  for (i = 0; i < 3; i++) {
     // TODO: ask question 2 and store reply in variable answer_f1_a2
-  convo.ask({
-    text: "Das ist Frage 2",
+    convo.ask({
+      text: "Das ist Frage 2",
 
-    quick_replies: [{
-      title: 'Antwort 1 zu Frage 2', payload: '1'
-    },
-    {
-      title: 'Antwort 2 zu Frage 2', payload: '2'
-    },
-    {
-      title: 'Antwort 3 zu Frage 2', payload: '3'
-    }]
-  }, [], 'answer_f1_a2')
+      quick_replies: [{
+        title: 'Antwort 1 zu Frage 2', payload: '1'
+      },
+      {
+        title: 'Antwort 2 zu Frage 2', payload: '2'
+      },
+      {
+        title: 'Antwort 3 zu Frage 2', payload: '3'
+      }]
+    }, [], 'answer_f1_a2')
   }
 
-  
+
 
 
   convo.ask({

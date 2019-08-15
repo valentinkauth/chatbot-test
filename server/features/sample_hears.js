@@ -34,6 +34,16 @@ module.exports = function(controller) {
         await bot.beginDialog('testfragebogen');
     });
 
+    // reply with user id
+    controller.hears(async(message) => message.text && message.text.toLowerCase() === 't2', ['message'], async(bot, message) => {
+        await bot.beginDialog('testfragebogen_neu');
+    });
+
+    // reply with user id
+    controller.hears(async(message) => message.text && message.text.toLowerCase() === 's', ['message'], async(bot, message) => {
+        await bot.beginDialog('sample_dialog');
+    });
+
      // reply with user id
      controller.hears('typing','message', async(bot, message) => {
         await bot.say({ type: 'typing' });

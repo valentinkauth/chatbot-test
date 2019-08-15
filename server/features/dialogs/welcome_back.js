@@ -13,6 +13,9 @@ module.exports = function (controller) {
   // set a variable here that can be used in the message template 
   convo.before('default', async (convo, bot) => {
 
+    // TODO: Check for existing and unfinished conversations
+    // TODO: Check for any conversations waiting in the queue (e.g. enabled by triggers while user was not connected)
+
     convo.setVar('user_name', 'Valentin');
 
   });
@@ -31,10 +34,6 @@ module.exports = function (controller) {
     // Check if all fields of questionnaire are field and mark questionnaire as done if so.
     // If not all fields are marked, redo questionnaire
     // handle results.name, results.age, results.color
-
-    console.log(MY_DIALOG_ID + " ended");
-    console.log("results:")
-    console.log(results);
 
   });
 
