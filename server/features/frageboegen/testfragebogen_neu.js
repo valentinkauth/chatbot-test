@@ -37,7 +37,15 @@ module.exports = function (controller) {
 
         convo.setVar('user_name', 'Valentin');
 
-        convo.setVar('current_thread', 'Psy_G_01_t0')
+        
+
+        // TODO: Check in database which answers are already answered and continue with last answered question.
+        convo.setVar('starting_thread', 'welcome_back_questionnaire_thread')
+        convo.setVar('current_question_thread', 'Psy_G_01_t0')
+        
+        // TODO: If questionnaire is started for the first time (no data in database available) start with default thread
+        convo.setVar('starting_thread', 'introduction_questionnaire_thread')
+        convo.setVar('current_question_thread', 'default/initial')
 
     });
 
@@ -49,35 +57,36 @@ module.exports = function (controller) {
 
 
     // Iterate through all elements
-    questions.forEach((element, index) => {
+    questions.forEach((question, index) => {
 
-        var threadName = element['name']
+        var threadName = question['name']
 
         // Check for needed fields
-        if (element['item'] && element['name'] && element['answer_options']['answer_option'] && element['answer_options']['state'] && element['category']) {
+        if (question['item'] && question['name'] && question['answer_options']['answer_option'] && question['answer_options']['state'] && question['category']) {
 
             // Send category explanation if current question it part of new category
-            if (element['category'] && element['category'] != currentCategory && categories[element['category']]) {
+            if (question['category'] && question['category'] != currentCategory && categories[question['category']]) {
 
-                convo.addMessage(categories[element['category']], threadName);
-                currentCategory = element['category'];
+                convo.addMessage(categories[question['category']], threadName);
+                currentCategory = question['category'];
             }
 
 
-            if (element['answer_options']['answer_option'].length > 1) {
+            if (question['answer_options']['answer_option'].length > 1) {
                 // Sort list based on code, so answers are not in random order and the -99 code will be displayed in the end
-                var answerOptionsSorted = element['answer_options']['answer_option'].sort(function (a, b) {
+                var answerOptionsSorted = question['answer_options']['answer_option'].sort(function (a, b) {
 
                     return Math.abs(a['code']) - Math.abs(b['code'])
                 })
 
             } else {
-                var answerOptionsSorted = element['answer_options']['answer_option']
+                var answerOptionsSorted = question['answer_options']['answer_option']
             }
 
 
 
-            var questionString = element['item']
+            // Set question 
+            var questionString = question['item']
 
             // Initialize empty array for quick reply objects
             var replies = []
@@ -89,6 +98,9 @@ module.exports = function (controller) {
 
             // Assign value for next thread if there is another question following the current one. Otherwise assign empty next thread to end conversation
             var nextThread = '';
+
+        
+
             if (index < questions.length - 1) {
                 if (questions[index + 1]['name']) {
                     nextThread = questions[index + 1]['name'];
@@ -98,17 +110,18 @@ module.exports = function (controller) {
             }
 
 
-            answerOptionsSorted.forEach(element => {
+            answerOptionsSorted.forEach(answerOption => {
 
-                switch (element['code']) {
+                switch (answerOption['code']) {
                     // float: No quick reply button, handler checks for float
                     case "-94":
 
                         questionString += " Bitte gebe die Antwort als Zahlenwert in das Textfeld des Chats ein. Du kannst auch Kommazahlen verwenden"
 
                         var handler = async (response, convo, bot) => {
-                            convo.setVar(element['name'], { code: element['code'], value: response })
+                            convo.setVar(question['name'], { code: answerOption['code'], value: response })
                             // TODO: only go to next thread if input type is right and inside given range (e.g. to avoid typos in weight or other inputs)
+                            
                             await convo.gotoThread(nextThread);
                         }
 
@@ -130,17 +143,21 @@ module.exports = function (controller) {
                     // This way we can display the text as the bots answer instead of the code/payload
                     default:
 
-                        var pattern = element['text']
+                        var pattern = answerOption['text']
+
+                        var type = 'string'
+                        
                         var handler = async (response, convo, bot) => {
-                            convo.setVar(element['name'], { code: element['code'], value: response })
+                            convo.setVar(question['name'], { code: answerOption['code'], value: response })
+                            console.log(answerOption['code'])
                             await convo.gotoThread(nextThread);
                         }
 
                         // Add pattern and correspoding handler to patterns array
-                        patterns.push({ pattern: pattern, handler: handler })
+                        patterns.push({ pattern: pattern, type: type, handler: handler })
 
                         // Add single quick reply object to array
-                        replies.push({ title: element['text'], payload: element['text'] })
+                        replies.push({ title: answerOption['text'], payload: answerOption['text'] })
 
                         break;
                 }
@@ -149,6 +166,17 @@ module.exports = function (controller) {
             })
 
 
+            // Typing stuff
+            // convo.addAction('typing', threadName)
+            // convo.addMessage({type: 'typing'}, 'typing');
+            // convo.addAction('next_thread','typing');
+
+            // convo.before(threadName,  async() => {
+            //     return new Promise((resolve, reject) => {
+            //         // simulate some long running process
+            //         setTimeout(resolve, 3000);
+            //     });
+            // });
 
             convo.addQuestion({
                 text: questionString,
@@ -156,13 +184,13 @@ module.exports = function (controller) {
             }, patterns, {}, threadName)
 
 
-            console.log(questionString, replies, patterns, threadName)
+          //  console.log(questionString, replies, patterns, threadName)
 
 
 
 
         } else {
-            console.log("Element does not contain all informations: " + element + index)
+            console.log("Element does not contain all informations: " + question + index)
         }
 
     });
@@ -176,11 +204,9 @@ module.exports = function (controller) {
         // If not all fields are marked, redo questionnaire
         // handle results.name, results.age, results.color
 
-        //console.log(results);
+        console.log(results);
 
     });
-
-    console.log(convo)
 
     // Add questionnaire to controller
     controller.addDialog(convo);
