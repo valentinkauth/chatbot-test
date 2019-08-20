@@ -21,19 +21,26 @@ module.exports = function (controller) {
   });
 
 
+
   // send greeting
   // TODO: create variatons in greeting
   convo.say("Hallo {{ vars.user_name }}, willkommen zurück!");
 
-  // TODO: offer pre-defined selections (and later enable free-text with intent analysis)
-  // convo.ask()
+
+
+ 
+
+
 
 
   // log all variables when dialog is completed
   convo.after(async (results, bot) => {
-    // Check if all fields of questionnaire are field and mark questionnaire as done if so.
-    // If not all fields are marked, redo questionnaire
-    // handle results.name, results.age, results.color
+
+    // TODO: Check if there are questionnaires in the queue that need to be triggered
+    // If yes, trigger them here
+    // If no, start main menu conversation
+    await bot.beginDialog('main_menu');
+
 
   });
 

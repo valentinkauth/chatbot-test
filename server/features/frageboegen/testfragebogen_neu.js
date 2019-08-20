@@ -128,6 +128,7 @@ module.exports = function (controller) {
                         patterns.push({ default: true, handler: handler })
 
                         break;
+                    
                     // freetext: No quick reply button, handler might check for text
                     case "-95":
 
@@ -143,13 +144,14 @@ module.exports = function (controller) {
                     // This way we can display the text as the bots answer instead of the code/payload
                     default:
 
+                        // In this case, the answer option is the pattern to look for 
+                        // TODO: Enable matching of answers with brackets
                         var pattern = answerOption['text']
 
                         var type = 'string'
                         
                         var handler = async (response, convo, bot) => {
                             convo.setVar(question['name'], { code: answerOption['code'], value: response })
-                            console.log(answerOption['code'])
                             await convo.gotoThread(nextThread);
                         }
 
@@ -177,6 +179,26 @@ module.exports = function (controller) {
             //         setTimeout(resolve, 3000);
             //     });
             // });
+            
+
+            // patterns.push( {
+            //     pattern: "123",
+            //     handler: async (response, convo, bot) => {
+            //         console.log("Handler triggered")
+            //     }
+            // }
+            // )
+
+
+            patterns.push({
+                default: true,
+                handler: async(response, convo, bot) => {
+                    await bot.say('Bitte benutze zum Antworten eine der vorgebebenen Möglichkeiten');
+                    // start over!
+                    return await convo.repeat();
+                }
+            });
+
 
             convo.addQuestion({
                 text: questionString,

@@ -20,6 +20,8 @@ require('dotenv').config();
 const https = require('https');
 const fs = require('fs');
 
+
+// sudo service mongod start
 let storage = null;
 if (process.env.MONGO_URI) {
     storage = mongoStorage = new MongoDbStorage({
@@ -70,7 +72,7 @@ controller.ready(() => {
     controller.loadModules(__dirname + '/features');
     controller.loadModules(__dirname + '/features/dialogs');
     controller.loadModules(__dirname + '/features/frageboegen');
-    // controller.loadModules(__dirname + '/features/ziele');
+    controller.loadModules(__dirname + '/features/ziele');
     
 
     /* catch-all that uses the CMS to trigger dialogs */

@@ -23,7 +23,8 @@
 					"answer_option": [
 						{
 							"code": "0",
-							"text": "zu keinem Zeitpunkt"
+							"text": "zu keinem Zeitpunkt",
+							"next_thread": ""
 						},
 						{
 							"code": "1",
