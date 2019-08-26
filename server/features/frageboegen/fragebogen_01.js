@@ -13,11 +13,25 @@ module.exports = function (controller) {
   // set a variable here that can be used in the message template 
   convo.before('default', async (convo, bot) => {
 
+    // Get user of conversation
+    let user = convo.vars.user;
+
+    // TODO: Write custom method that gets all important data of user from database
+    //let userData = await getUserDataFromDB(user);
+    // Get user data from storage
+    userData = await controller.storage.read(['new_user'])
+
+    console.log(userData)
+
+    if (userData) {
+      convo.setVar('user_name', userData.new_user.user_name)
+    } else {
+      convo.setVar('user_name', "Mr. Unbekannt")
+    }
+
     convo.setVar('fragebogen_id', 1);
 
-    convo.setVar('user_name', 'Valentin');
-
-    convo.setVar('answers_q1', [{ text: 'Antwort 1 zu Frage 1', value: '1' }, { text: 'Antwort 2 zu Frage 1', value: '2' }, { text: 'Antwort 3 zu Frage 1', value: '3' }])
+    //convo.setVar('answers_q1', [{ text: 'Antwort 1 zu Frage 1', value: '1' }, { text: 'Antwort 2 zu Frage 1', value: '2' }, { text: 'Antwort 3 zu Frage 1', value: '3' }])
 
   });
 
@@ -153,6 +167,10 @@ module.exports = function (controller) {
     // handle results.name, results.age, results.color
 
     console.log(results);
+
+    await controller.storage.write({ 'MY_DIALOG_ID.results': results });
+
+
 
   });
 

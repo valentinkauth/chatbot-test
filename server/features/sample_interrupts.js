@@ -1,6 +1,4 @@
 module.exports = function(controller) {
-
- 
    
     controller.interrupts('quit', 'message', async(bot, message) => {
         await bot.reply(message, 'Quitting!');

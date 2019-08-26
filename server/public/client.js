@@ -492,8 +492,11 @@ var Botkit = {
 };
 
 
+
 (function () {
+
+    var user = {id: 'test_user', name: 'Valentin'}
     // your page initialization code here
     // the DOM will be available here
-    Botkit.boot();
+    Botkit.boot(user);
 })();

@@ -1,0 +1,31 @@
+{
+  "_id": "new_user",
+  "user_info": {
+    "user_name": "valentinkauth",
+    "first_name": "Valentin",
+    "last_name": "Kauth",
+    "nick_name": "Vale",
+    "dob": "16/09/1993"
+  },
+  "questionnaire_results": {
+      "q1": {"state": "incomplete", "results": null},
+      "q2": {"state": "new", "results": null},
+      "q3": {"state": "new", "results": null},
+      "q4": {"state": "new", "results": null}
+  },
+  "goals": {
+    "nutrition": {
+        "description": "Gesünder ernähren",
+        "date": "18/06/2018",
+        "creator": "Doctor XY"
+    },
+    "exercise": {
+        "description": "Laufen gehen, 5-mal die Woche",
+        "date": "18/06/2018",
+        "creator": "Doctor XY"
+    }
+  },
+  "queue": [
+      "fragebogen_01"
+  ]
+}

@@ -16,7 +16,19 @@ module.exports = function (controller) {
     // TODO: Check for existing and unfinished conversations
     // TODO: Check for any conversations waiting in the queue (e.g. enabled by triggers while user was not connected)
 
-    convo.setVar('user_name', 'Valentin');
+    // Get user of conversation
+    let user = convo.vars.user; 
+
+    userData = await controller.storage.read([user])
+
+    console.log(userData)
+
+    if (Object.keys(userData).length) {
+
+      convo.setVar('user_name', userData[user].user_info.user_name);
+    } else {
+      convo.setVar('user_name', 'XXX')
+    }    
 
   });
 
@@ -25,10 +37,6 @@ module.exports = function (controller) {
   // send greeting
   // TODO: create variatons in greeting
   convo.say("Hallo {{ vars.user_name }}, willkommen zurück!");
-
-
-
- 
 
 
 
