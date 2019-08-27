@@ -19,19 +19,17 @@ module.exports = function (controller) {
     // TODO: Write custom method that gets all important data of user from database
     //let userData = await getUserDataFromDB(user);
     // Get user data from storage
-    userData = await controller.storage.read(['new_user'])
+    userData = await controller.storage.read([user])
 
     console.log(userData)
 
-    if (userData) {
-      convo.setVar('user_name', userData.new_user.user_name)
+    if (Object.keys(userData).length) {
+      convo.setVar('user_name', userData[user].user_info.nick_name)
     } else {
       convo.setVar('user_name', "Mr. Unbekannt")
     }
 
     convo.setVar('fragebogen_id', 1);
-
-    //convo.setVar('answers_q1', [{ text: 'Antwort 1 zu Frage 1', value: '1' }, { text: 'Antwort 2 zu Frage 1', value: '2' }, { text: 'Antwort 3 zu Frage 1', value: '3' }])
 
   });
 

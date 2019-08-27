@@ -24,8 +24,7 @@ module.exports = function (controller) {
     console.log(userData)
 
     if (Object.keys(userData).length) {
-
-      convo.setVar('user_name', userData[user].user_info.user_name);
+      convo.setVar('user_name', userData[user].user_info.nick_name);
     } else {
       convo.setVar('user_name', 'XXX')
     }    

@@ -13,14 +13,9 @@ module.exports = function (controller) {
     // set a variable here that can be used in the message template 
     convo.before('default', async (convo, bot) => {
 
-        // TODO: Check for existing and unfinished conversations
-        // TODO: Check for any conversations waiting in the queue (e.g. enabled by triggers while user was not connected)
-
-        convo.setVar('user_name', 'Valentin');
-
     });
 
-
+    // TODO: Change main menu from ask to say conversation to not have a conversation open
     // TODO: offer pre-defined selections (and later enable free-text with intent analysis)
     convo.ask({
         text: 'Was kann ich für dich tun? Klicke eine der Auswahlmöglichkeiten an und ich versuche dir weiter zu helfen :)',
