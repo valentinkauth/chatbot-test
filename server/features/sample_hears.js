@@ -50,4 +50,20 @@ module.exports = function(controller) {
     });
 
 
+    // main menu: reply to goals request
+    controller.hears('ziele','message', async(bot, message) => {
+        await bot.reply(message, 'Ich zeige dir jetzt deine Ziele');
+    });
+
+    // main menu: reply to exercises request
+    controller.hears(['übungen', 'uebungen'],'message', async(bot, message) => {
+        await bot.reply(message, 'Ich zeige dir jetzt ein paar Übungen');
+    });
+
+    // main menu: reply to exercises request
+    controller.hears(['ernaehrung', 'ernährung'],'message', async(bot, message) => {
+        await bot.reply(message, 'Ich gebe dir jetzt ein paar Ernährungstipps');
+    });
+
+
 }

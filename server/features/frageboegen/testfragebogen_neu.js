@@ -168,28 +168,6 @@ module.exports = function (controller) {
             })
 
 
-            // Typing stuff
-            // convo.addAction('typing', threadName)
-            // convo.addMessage({type: 'typing'}, 'typing');
-            // convo.addAction('next_thread','typing');
-
-            // convo.before(threadName,  async() => {
-            //     return new Promise((resolve, reject) => {
-            //         // simulate some long running process
-            //         setTimeout(resolve, 3000);
-            //     });
-            // });
-            
-
-            // patterns.push( {
-            //     pattern: "123",
-            //     handler: async (response, convo, bot) => {
-            //         console.log("Handler triggered")
-            //     }
-            // }
-            // )
-
-
             patterns.push({
                 default: true,
                 handler: async(response, convo, bot) => {

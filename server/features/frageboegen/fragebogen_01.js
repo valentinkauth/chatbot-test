@@ -10,6 +10,11 @@ module.exports = function (controller) {
 
   let convo = new BotkitConversation(MY_DIALOG_ID, controller);
 
+
+  var string = "(a)bc"
+
+  var regularExpression = "\(a\)bc"
+
   // set a variable here that can be used in the message template 
   convo.before('default', async (convo, bot) => {
 
@@ -21,7 +26,6 @@ module.exports = function (controller) {
     // Get user data from storage
     userData = await controller.storage.read([user])
 
-    console.log(userData)
 
     if (Object.keys(userData).length) {
       convo.setVar('user_name', userData[user].user_info.nick_name)
@@ -32,6 +36,26 @@ module.exports = function (controller) {
     convo.setVar('fragebogen_id', 1);
 
   });
+
+   // ask a question, evaluate answer, take conditional action based on response
+   convo.ask('Do you want to eat a taco?', [
+    {
+      pattern: new RegExp(regularExpression),
+      type: 'string',
+    },
+    {
+      pattern: 'no',
+      type: 'string',
+    }, 
+   {
+      default: true,
+      handler: async (response, convo, bot) => {
+        await bot.say('I do not understand your response!');
+        // start over!
+        return await convo.repeat();
+      }
+    }
+  ], 'tacos');
 
 
   // send greeting
@@ -50,6 +74,8 @@ module.exports = function (controller) {
   // TODO: ask question 1 and store reply in variable answer_f1_a1
   convo.ask({
     text: "Das ist Frage 1",
+
+    disable_input: "Hellooo",
 
     quick_replies: [{
       title: 'Antwort 1 zu Frage 1', payload: '1'

@@ -8,6 +8,7 @@ const { BotkitConversation } = require("botkit");
 module.exports = function (controller) {
   const MY_DIALOG_ID = "welcome_back_dialog";
 
+
   let convo = new BotkitConversation(MY_DIALOG_ID, controller);
 
   // set a variable here that can be used in the message template 
@@ -21,13 +22,19 @@ module.exports = function (controller) {
 
     userData = await controller.storage.read([user])
 
-    console.log(userData)
+    var userName = "XXX"
 
     if (Object.keys(userData).length) {
-      convo.setVar('user_name', userData[user].user_info.nick_name);
+      userName = userData[user].user_info.nick_name;
     } else {
-      convo.setVar('user_name', 'XXX')
-    }    
+      userName = 'XXX';
+    }
+
+    // Define string to greet including the user name
+    let greeting = [`Hallo ${userName} Willkommen zurück!`, `Schön dich wieder zu sehen, ${userName}!`, `Hey ${userName}, ich hoffe du hast einen tollen Tag!`]
+    
+    // Select a greeting string randomly
+    convo.setVar('greeting', greeting[Math.floor(Math.random() * greeting.length)])
 
   });
 
@@ -35,11 +42,9 @@ module.exports = function (controller) {
 
   // send greeting
   // TODO: create variatons in greeting
-  convo.say("Hallo {{ vars.user_name }}, willkommen zurück!");
+  convo.say("{{ vars.greeting }}");
 
-
-
-
+  
   // log all variables when dialog is completed
   convo.after(async (results, bot) => {
 

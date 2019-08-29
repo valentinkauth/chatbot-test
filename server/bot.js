@@ -44,9 +44,9 @@ if (process.env.MONGO_URI) {
 
 //const adapter = new WebAdapter({server: testServer});
 
-
-
+// Create Web Adapter
 const adapter = new WebAdapter({});
+// TODO: Add web adapter middleware here
 
 
 const controller = new Botkit({
@@ -57,6 +57,8 @@ const controller = new Botkit({
 
     storage: storage,
 });
+
+
 
 if (process.env.cms_uri) {
     controller.usePlugin(new BotkitCMSHelper({

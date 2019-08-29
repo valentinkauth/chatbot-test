@@ -446,7 +446,7 @@ var Botkit = {
                 // }
                 // list.style.width = width + 'px';
 
-                if (message.disable_input) {
+                if (message.quick_replies) {
                     that.input.disabled = true;
                 } else {
                     that.input.disabled = false;
