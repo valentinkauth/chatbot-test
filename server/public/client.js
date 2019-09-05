@@ -197,6 +197,7 @@ var Botkit = {
         // Connection opened
         that.socket.addEventListener('open', function (event) {
             console.log('CONNECTED TO SOCKET');
+            console.log(connectEvent)
             that.reconnect_count = 0;
             that.trigger('connected', event);
             that.deliverMessage({
@@ -446,11 +447,11 @@ var Botkit = {
                 // }
                 // list.style.width = width + 'px';
 
-                if (message.quick_replies) {
-                    that.input.disabled = true;
-                } else {
-                    that.input.disabled = false;
-                }
+                // if (message.quick_replies) {
+                //     that.input.disabled = true;
+                // } else {
+                //     that.input.disabled = false;
+                // }
             } else {
                 that.input.disabled = false;
             }

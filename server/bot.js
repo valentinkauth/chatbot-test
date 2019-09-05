@@ -21,7 +21,7 @@ const https = require('https');
 const fs = require('fs');
 
 
-// sudo service mongod start
+// Terminal command to start mongoDB: sudo service mongod start
 let storage = null;
 if (process.env.MONGO_URI) {
     storage = mongoStorage = new MongoDbStorage({

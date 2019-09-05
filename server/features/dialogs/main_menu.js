@@ -11,6 +11,8 @@ module.exports = function (controller) {
     let greeting = ['Was kann ich heute für dich tun?', 'Was kann ich für dich tun?', 'Wie kann ich dir behilflich sein?'] 
     let greeting2 = ['Klicke eine der Auswahlmöglichkeiten an oder schreibe mir direkt und ich versuche dir weiterzuhelfen! :)']
 
+
+
     const MY_DIALOG_ID = "main_menu";
 
     let convo = new BotkitConversation(MY_DIALOG_ID, controller);
@@ -25,6 +27,9 @@ module.exports = function (controller) {
 
     // TODO: Change main menu from ask to say conversation to not have a conversation open
     // TODO: offer pre-defined selections (and later enable free-text with intent analysis)
+
+
+    
 
     convo.say({
         text: '{{ vars.main_menu }}',

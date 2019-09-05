@@ -31,14 +31,18 @@ module.exports = function (controller) {
     }
 
     // Define string to greet including the user name
-    let greeting = [`Hallo ${userName} Willkommen zurück!`, `Schön dich wieder zu sehen, ${userName}!`, `Hey ${userName}, ich hoffe du hast einen tollen Tag!`]
+    let greeting = [`Hallo ${userName} Willkommen zurück!`, `Schön dich wieder zu sehen, ${userName}!`, `Hey ${userName}, ich hoffe du hast einen tollen Tag!`, `Hey ${userName}`]
     
     // Select a greeting string randomly
     convo.setVar('greeting', greeting[Math.floor(Math.random() * greeting.length)])
 
+    // Set starting thread in before 
+    await convo.gotoThread('default')
   });
 
 
+
+  convo.addMessage("Helloooo", 'user_known')
 
   // send greeting
   // TODO: create variatons in greeting

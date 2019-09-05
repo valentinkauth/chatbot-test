@@ -1,31 +1,63 @@
 {
   "_id": "test_user",
-  "user_info": {
-    "user_name": "valentinkauth",
-    "first_name": "Valentin",
-    "last_name": "Kauth",
-    "nick_name": "Vale",
-    "dob": "16/09/1993"
-  },
-  "questionnaire_results": {
-      "q1": {"state": "incomplete", "results": null},
-      "q2": {"state": "new", "results": null},
-      "q3": {"state": "new", "results": null},
-      "q4": {"state": "new", "results": null}
-  },
-  "goals": {
-    "nutrition": {
+  "state": {
+    "user_info": {
+      "user_name": "valentinkauth",
+      "first_name": "Valentin",
+      "last_name": "Kauth",
+      "nick_name": "Vale",
+      "dob": "16/09/1993"
+    },
+    "questionnaires": {
+      "q1": {
+        "state": "complete",
+        "current_question": "default",
+        "results": {
+          "PSY_XYZ_01": {
+            "code": 1,
+            "value": "Ja"
+          },
+          "PSY_XYZ_02": {
+            "code": -99,
+            "value": "Ich möchte diese Frage nicht beantworten"
+          }
+        }
+      },
+      "q2": {
+        "state": "incomplete",
+        "current_question": "PSY_XYZ_01",
+        "results": {}
+      },
+      "q3": {
+        "state": "new",
+        "current_question": "default",
+        "results": {}
+      },
+      "q4": {
+        "state": "new",
+        "current_question": "default",
+        "results": {}
+      },
+      "q5": {
+        "state": "new",
+        "current_question": "default",
+        "results": {}
+      }
+    },
+    "goals": {
+      "nutrition": {
         "description": "Gesünder ernähren",
         "date": "18/06/2018",
         "creator": "Doctor XY"
-    },
-    "exercise": {
+      },
+      "exercise": {
         "description": "Laufen gehen, 5-mal die Woche",
         "date": "18/06/2018",
         "creator": "Doctor XY"
-    }
-  },
-  "queue": [
+      }
+    },
+    "queue": [
       "fragebogen_01"
-  ]
+    ]
+  }
 }

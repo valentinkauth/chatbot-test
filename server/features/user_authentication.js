@@ -4,10 +4,19 @@
  */
 module.exports = function(controller) {
 
+  controller.on('event', async(bot, message) => {
+    // do somethign using bot and message like...
+    await bot.reply(message,'Received an event.');
+   });
+
 
   // Check for existing user in database after web socket connection was established successfully
-  controller.on("welcome_back", async (bot, message) => {
+  controller.on(["welcome_back", "hello"], async (bot, message) => {
+
+    console.log("User connected")
     // Check for user in Database
+
+    await bot.cancelAllDialogs();
 
     let userData = await controller.storage.read([message.user])
 
