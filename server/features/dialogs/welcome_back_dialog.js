@@ -17,38 +17,49 @@ module.exports = function (controller) {
     // TODO: Check for existing and unfinished conversations
     // TODO: Check for any conversations waiting in the queue (e.g. enabled by triggers while user was not connected)
 
-    // Get user of conversation
-    let user = convo.vars.user; 
 
-    userData = await controller.storage.read([user])
+    // TODO: Get user name
+    // TODO: Get latest queue item
 
-    var userName = "XXX"
+    let user_id = convo.vars.user;
+    let userName = "";
 
-    if (Object.keys(userData).length) {
-      userName = userData[user].user_info.nick_name;
-    } else {
-      userName = 'XXX';
+    // Access user data from DB
+    const items = await controller.storage.read([user_id]);
+    const userData = items[user_id] || {};
+
+    // Check if user data available and set nick name
+    if (userData.user_info && userData.user_info.nick_name) {
+      userName = userData.user_info.nick_name
     }
 
     // Define string to greet including the user name
     let greeting = [`Hallo ${userName} Willkommen zurück!`, `Schön dich wieder zu sehen, ${userName}!`, `Hey ${userName}, ich hoffe du hast einen tollen Tag!`, `Hey ${userName}`]
-    
+
     // Select a greeting string randomly
     convo.setVar('greeting', greeting[Math.floor(Math.random() * greeting.length)])
+
+
+    if (userData.queue) {
+      if (userData.queue.length > 0) {
+        console.log(userData.queue[0])
+        await bot.beginDialog(userData.queue[0]);
+      } else {
+        await convo.gotoThread('default')
+      }
+    } else {
+      await convo.gotoThread('default')
+    }
 
     // Set starting thread in before 
     await convo.gotoThread('default')
   });
 
 
-
-  convo.addMessage("Helloooo", 'user_known')
-
   // send greeting
-  // TODO: create variatons in greeting
   convo.say("{{ vars.greeting }}");
 
-  
+
   // log all variables when dialog is completed
   convo.after(async (results, bot) => {
 
