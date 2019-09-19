@@ -1,6 +1,6 @@
 ﻿{
 	"questions": {
-		"question": [
+		"category_descriptions": [
 			{
 				"main_title": "TESTFRAGEBOGEN - Die folgenden Aussagen betreffen Dein Wohlbefinden in den letzten zwei Wochen. Bitte markiere bei jeder Aussage die Rubrik, die Deiner Meinung nach am besten beschreibt, wie Du dich in den letzten zwei Wochen gefühlt hast.",
 				"category": "Wohlbefinden"
@@ -16,7 +16,9 @@
 			{
 				"main_title": "Als letztes wird Dir eine Frage zu Deinem Gewicht gestellt.",
 				"category": "Gewicht"
-			},
+			}
+		],
+		"question": [
 			{
 				"item": "In den letzten 2 Wochen war ich froh und guter Laune.",
 				"answer_options": {

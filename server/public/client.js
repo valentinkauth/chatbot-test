@@ -41,7 +41,7 @@ var Botkit = {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if (xmlhttp.status == 200) {
                         var response = xmlhttp.responseText;
-                        if (response !='') {
+                        if (response != '') {
                             var message = null;
                             try {
                                 message = JSON.parse(response);
@@ -88,6 +88,8 @@ var Botkit = {
             channel: this.options.use_sockets ? 'websocket' : 'webhook'
         });
 
+        this.storeMessageLocal(message, 'message_sent')
+
         this.input.value = '';
 
         this.trigger('sent', message);
@@ -102,23 +104,38 @@ var Botkit = {
         }
     },
     getHistory: function (guid) {
+
+        // TODO: Get history from local storage
+
         var that = this;
 
+        if (window.localStorage.getItem("chatbot_history")) {
 
-        if (that.guid) {
-            that.request('/botkit/history', {
-                user: that.guid
-            }).then(function (history) {
-                
-                if (history.success) {
-                    that.trigger('history_loaded', history.history);
-                } else {
-                    that.trigger('history_error', new Error(history.error));
-                }
-            }).catch(function (err) {
-                that.trigger('history_error', err);
-            });
+            var history = JSON.parse(window.localStorage.getItem("chatbot_history"));
+
+            that.trigger('history_loaded', history);
+
+        } else {
+            that.trigger('history_error', "Could not load history from local storage");
         }
+
+
+        // if (that.guid) {
+        //     that.request('/botkit/history', {
+        //         user: that.guid
+        //     }).then(function (history) {
+
+        //         if (history.success) {
+        //             that.trigger('history_loaded', history.history);
+        //         } else {
+        //             that.trigger('history_error', new Error(history.error));
+        //         }
+        //     }).catch(function (err) {
+        //         that.trigger('history_error', err);
+        //     });
+        // }
+
+
     },
     webhook: function (message) {
         var that = this;
@@ -248,6 +265,7 @@ var Botkit = {
         this.input.focus();
     },
     renderMessage: function (message) {
+
         var that = this;
         if (!that.next_line) {
             that.next_line = document.createElement('div');
@@ -263,6 +281,14 @@ var Botkit = {
         if (!message.isTyping) {
             delete (that.next_line);
         }
+    },
+    storeMessageLocal: function(message, type) {
+
+        var history = JSON.parse(window.localStorage.getItem("chatbot_history"))
+        history.push({text: message.text, type: type})
+        window.localStorage.setItem("chatbot_history", JSON.stringify(history));
+
+
     },
     triggerScript: function (script, thread) {
         this.deliverMessage({
@@ -353,6 +379,29 @@ var Botkit = {
         var that = this;
 
 
+        var history = window.localStorage.getItem("chatbot_history")
+
+        if (history === null || history == "") {
+            history = new Array()
+            window.localStorage.setItem("chatbot_history", JSON.stringify(history))
+
+        }
+
+        // Local history storage
+        var history = JSON.parse(window.localStorage.getItem("chatbot_history"))
+
+        // Check if history already existing
+        if (history === null) {
+            
+            console.log("Will create a local storage history object now")
+
+            // Create new chatbot history array
+            history = new Array()
+
+            window.localStorage.setItem("chatbot_history", JSON.stringify(history))
+        }
+
+
         that.message_window = document.getElementById("message_window");
 
         that.message_list = document.getElementById("message_list");
@@ -400,6 +449,7 @@ var Botkit = {
         that.on('message', function (message) {
 
             console.log('RECEIVED MESSAGE', message);
+            that.storeMessageLocal(message, 'message_received');
             that.renderMessage(message);
 
         });
@@ -462,7 +512,7 @@ var Botkit = {
                 for (var m = 0; m < history.length; m++) {
                     that.renderMessage({
                         text: history[m].text,
-                        type: history[m].type == 'message_received' ? 'outgoing' : 'incoming', // set appropriate CSS class
+                        type: history[m].type == 'message_received' ? 'incoming' : 'outgoing', // set appropriate CSS class
                     });
                 }
             }
@@ -496,7 +546,7 @@ var Botkit = {
 
 (function () {
 
-    var user = {id: 'test_user', name: 'Valentin'}
+    var user = { id: 'test_user', name: 'Valentin' }
     // your page initialization code here
     // the DOM will be available here
     Botkit.boot(user);

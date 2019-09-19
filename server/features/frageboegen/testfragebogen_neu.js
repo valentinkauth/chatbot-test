@@ -21,13 +21,13 @@ module.exports = function (controller) {
 
     // Iterate through categories and create categories dictionary with categories and the corresponding explanation texts
     var categories = {};
-    questions.forEach(element => {
-        if (element['main_title'] && element['category']) {
-            categories[element['category']] = element['main_title']
-        }
-    })
-
-
+    if (questions.category_descriptions) {
+        questions.category_descriptions.forEach(element => {
+            if (element['main_title'] && element['category']) {
+                categories[element['category']] = element['main_title']
+            }
+        })
+    }
 
     // Handling dynamic start before start of the converstaion
     convo.before('default', async (convo, bot) => {
@@ -81,7 +81,7 @@ module.exports = function (controller) {
 
         // Start conversation with current question
         //convo.gotoThread(current_question);
-        convo.gotoThread("Psy_G_01_t0");
+        convo.gotoThread(current_question);
     });
 
 
