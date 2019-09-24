@@ -3,6 +3,7 @@
  * Licensed under the MIT License.
  */
 const { BotkitConversation } = require("botkit");
+const DBHelper = require('../../helper/DBHelper')
 var questionnaireIds = require('../../constants/questionnaire_id');
 
 
@@ -38,9 +39,6 @@ module.exports = function (controller) {
         // Set user id from conversation context
         let user_id = convo.vars.user;
 
-        // Set current question to default initially
-        var current_question = "default"
-
         // Access user data from DB
         const items = await controller.storage.read([user_id]);
         const userData = items[user_id] || {};
@@ -69,10 +67,12 @@ module.exports = function (controller) {
             // Add new questionnaire to user data array
             console.log(`Added new questionnaire with the id ${questionnaireIds.QNEU_ID} to questionnaire object in user data`)
             userData.questionnaires[questionnaireIds.QNEU_ID] = { 'state': "incomplete", 'current_question': "default", 'results': {} }
+            // Set current question to default initially
+            var current_question = "default"
         }
         // Set current question thread if questionnaire already exists
         else {
-            current_question = userData.questionnaires[questionnaireIds.QNEU_ID].current_question
+            var current_question = userData.questionnaires[questionnaireIds.QNEU_ID].current_question
         }
 
         // Store updated user data in db
