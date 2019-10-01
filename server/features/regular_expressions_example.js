@@ -3,10 +3,18 @@
  * Licensed under the MIT License.
  */
 module.exports = function(controller) {
-  if (controller.adapter.name === "Web Adapter") {
-    console.log("Loading sample web features...");
 
-    controller.hears(new RegExp(/\(1\)23/), "message", async (bot, message) => {
+  // var testString = /\(1\)23/;
+
+  var testString = "(1)23"
+
+  escapeStringRegExp.matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
+  function escapeStringRegExp(str) {
+      return str.replace(escapeStringRegExp.matchOperatorsRe, '\\$&');
+  }
+  
+
+    controller.hears(new RegExp(escapeStringRegExp('(1)23')), "message", async (bot, message) => {
       await bot.reply(message, {
         text: "Here are some quick replies",
         quick_replies: [
@@ -21,5 +29,4 @@ module.exports = function(controller) {
         ]
       });
     });
-  }
 };

@@ -33,46 +33,31 @@ module.exports = function (controller) {
     // Handling dynamic start before start of the converstaion
     convo.before('default', async (convo, bot) => {
 
-        // Set questionnaire ID
+        // Set questionnaire ID initially
         convo.setVar('id', questionnaireIds.QNEU_ID);
 
-        // Set user id from conversation context
-        let user_id = convo.vars.user;
+        console.log(convo.vars.id)
 
         // Access user data from DB
-        const items = await controller.storage.read([user_id]);
-        const userData = items[user_id] || {};
+        const items = await controller.storage.read([convo.vars.user]);
+        const userData = items[convo.vars.user] || {}
 
-        // Check if user data available and set nick name
-        if (Object.keys(userData).length) {
-            if ("nick_name" in userData.user_info) {
-                convo.setVar('user_name', userData.user_info.nick_name)
-            } else if ("first_name" in userData.user_info) {
-                convo.setVar('user_name', userData.user_info.first_name)
-            } else {
-                convo.setVar('user_name', "Unbekannter Benutzer")
-            }
-        }
-        else {
-            convo.setVar('user_name', "Unbekannter Benutzer")
-        }
-
+        // Set user name
+        convo.setVar('name', userData.user_info.nick_name)
 
         // DO STUFF WITH USER DATE HERE / UDPATE USER DATA HERE
 
-        // TODO: Set questionnaire as started/unfinished
-
         // Check if questionnaire is already added to user data
-        if (!(questionnaireIds.QNEU_ID in userData.questionnaires)) {
+        if (!(convo.vars.id in userData.questionnaires)) {
             // Add new questionnaire to user data array
-            console.log(`Added new questionnaire with the id ${questionnaireIds.QNEU_ID} to questionnaire object in user data`)
-            userData.questionnaires[questionnaireIds.QNEU_ID] = { 'state': "incomplete", 'current_question': "default", 'results': {} }
+            console.log(`Added new questionnaire with the id ${convo.vars.id} to questionnaire object in user data`)
+            userData.questionnaires[convo.vars.id] = { 'state': "incomplete", 'current_question': "default", 'results': {} }
             // Set current question to default initially
             var current_question = "default"
         }
         // Set current question thread if questionnaire already exists
         else {
-            var current_question = userData.questionnaires[questionnaireIds.QNEU_ID].current_question
+            var current_question = userData.questionnaires[convo.vars.id].current_question
         }
 
         // Store updated user data in db
@@ -80,13 +65,15 @@ module.exports = function (controller) {
         await controller.storage.write({ "test_user": userData });
 
         // Start conversation with current question
-        //convo.gotoThread(current_question);
         convo.gotoThread(current_question);
     });
 
 
-    // send greeting
-    convo.say("Hallo {{ vars.user_name }}, dies ist der neue Testfragebogen.");
+    // send greeting & explanation
+    convo.say("Hallo {{ vars.name }}, dies ist der neue Testfragebogen.");
+    convo.say("Ich werde dir nun ein paar Fragen stellen und es wäre super, wenn du mir diese beantworten könntest.");
+    convo.say("Die meisten Fragen kommen mit Antwortmöglichkeiten, die du dann einfach anklicken kannst.");
+    convo.say("Bei bestimmten Fragen kannst du Zahlenwerte (z.B dein Gewicht) oder Worte ganz einfach in die Textzeile eingeben, ich gebe dir dann aber nochmals bescheid ;)");
 
     // Go to first question normally
     //convo.addAction('thread_name')
@@ -113,13 +100,12 @@ module.exports = function (controller) {
             }
 
 
+            // Sort answers
             if (question['answer_options']['answer_option'].length > 1) {
                 // Sort list based on code, so answers are not in random order and the -99 code will be displayed in the end
                 var answerOptionsSorted = question['answer_options']['answer_option'].sort(function (a, b) {
-
                     return Math.abs(a['code']) - Math.abs(b['code'])
                 })
-
             } else {
                 var answerOptionsSorted = question['answer_options']['answer_option']
             }
@@ -141,9 +127,12 @@ module.exports = function (controller) {
             if (index < questions.length - 1) {
                 if (questions[index + 1]['name']) {
                     nextThread = questions[index + 1]['name'];
+                } else {
+                    nextThread = 'end_thread';
                 }
             } else {
-                nextThread = '';
+                // This should be called for the last question
+                nextThread = 'end_thread';
             }
 
 
@@ -153,17 +142,40 @@ module.exports = function (controller) {
                     // float: No quick reply button, handler checks for float
                     case "-94":
 
-                        questionString += " Bitte gebe die Antwort als Zahlenwert in das Textfeld des Chats ein. Du kannst auch Kommazahlen verwenden"
+                        questionString += "Bitte gebe die Antwort als Zahlenwert in das Textfeld des Chats ein. Du kannst auch Kommazahlen verwenden"
 
-                        var handler = async (response, convo, bot) => {
-                            convo.setVar(question['name'], { code: answerOption['code'], value: response })
-                            // TODO: only go to next thread if input type is right and inside given range (e.g. to avoid typos in weight or other inputs)
-                            // TODO: Store value right here for better persistence
+                        type = "float";
 
-                            await convo.gotoThread(nextThread);
+                        handler = async (response, convo, bot) => {
+
+                            // TODO: Check if number is a float value, replace true in IF statement by the check
+                            if (true) {
+
+                                // READ AND WRITE DB
+                                // Access user data from DB
+                                const items = await controller.storage.read([convo.vars.user]);
+                                const userData = items[convo.vars.user] || {};
+                                // Add response to results in user data
+                                userData.questionnaires[convo.vars.id].results[question['name']] = { code: answerOption['code'], value: response }
+                                // Update current question in user data
+                                userData.questionnaires[convo.vars.id].current_question = question['name']
+                                // Write updated user data to storage
+                                await controller.storage.write({ "test_user": userData });
+
+                                console.log(nextThread)
+
+                                // Go to next thread
+                                await convo.gotoThread(nextThread);
+
+                            } else {
+                                // Repeat question
+                                await bot.say('Bitte gebe als Antwort nur ganze Zahlenwerte ein.');
+                                await convo.repeat();
+                            }
                         }
 
-                        patterns.push({ default: true, handler: handler })
+                        // Add pattern and correspoding handler to patterns array
+                        patterns.push({ default: true, type: type, handler: handler })
 
                         break;
 
@@ -172,10 +184,63 @@ module.exports = function (controller) {
 
                         questionString += " Bitte gebe die Antwort als Freitext in das Textfeld des Chats ein."
 
+                        type = "string";
+
+                        handler = async (response, convo, bot) => {
+
+                            // READ AND WRITE DB
+                            // Access user data from DB
+                            const items = await controller.storage.read([convo.vars.user]);
+                            const userData = items[convo.vars.user] || {};
+                            // Add response to results in user data
+                            userData.questionnaires[convo.vars.id].results[question['name']] = { code: answerOption['code'], value: response }
+                            // Update current question in user data
+                            userData.questionnaires[convo.vars.id].current_question = question['name']
+                            // Write updated user data to storage
+                            await controller.storage.write({ "test_user": userData });
+
+                            // Go to next thread
+                            await convo.gotoThread(nextThread);
+                        }
+
+                        // Add pattern and correspoding handler to patterns array
+                        patterns.push({ default: true, type: type, handler: handler })
+
                         break;
                     // int: No quick reply button, handler checks for int
                     case "-96":
                         questionString += " Bitte gebe die Antwort als Zahlenwert in das Textfeld des Chats ein. Bitte verwende nur ganze Zahlenwerte."
+
+                        type = "int";
+
+                        handler = async (response, convo, bot) => {
+
+                            // Check if response is a valid number
+                            if (!(isNaN(response))) {
+
+                                // READ AND WRITE DB
+                                // Access user data from DB
+                                const items = await controller.storage.read([convo.vars.user]);
+                                const userData = items[convo.vars.user] || {};
+                                // Add response to results in user data
+                                userData.questionnaires[convo.vars.id].results[question['name']] = { code: answerOption['code'], value: response }
+                                // Update current question in user data
+                                userData.questionnaires[convo.vars.id].current_question = question['name']
+                                // Write updated user data to storage
+                                await controller.storage.write({ "test_user": userData });
+
+                                // Go to next thread
+                                await convo.gotoThread(nextThread);
+
+                            } else {
+                                // Repeat question
+                                await bot.say('Bitte gebe als Antwort nur ganze Zahlenwerte ein.');
+                                await convo.repeat();
+                            }
+                        }
+
+                        // Add pattern and correspoding handler to patterns array
+                        patterns.push({ default: true, type: type, handler: handler })
 
                         break;
                     // Create quick reply button and corresponding handler, that reacts only on the specific string (question text)
@@ -183,28 +248,32 @@ module.exports = function (controller) {
                     default:
 
                         // In this case, the answer option is the pattern to look for 
+
                         // TODO: Enable matching of answers with brackets
-                        var pattern = answerOption['text']
+
+                        // Convert string to regular expression, example from https://github.com/sindresorhus/escape-string-regexp
+                        escapeStringRegExp.matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
+                        function escapeStringRegExp(str) {
+                            return str.replace(escapeStringRegExp.matchOperatorsRe, '\\$&');
+                        }
+                        
+                        var pattern = new RegExp(escapeStringRegExp(answerOption['text']))
 
                         var type = 'string'
 
                         var handler = async (response, convo, bot) => {
-
-                            // TODO: Outsource in seperate reusable method
-                            //await storeAnswer(convo.vars.user, questionnaire_id, question_id, answerOption, value)
 
                             // READ AND WRITE DB
                             // Access user data from DB
                             let user_id = convo.vars.user;
                             const items = await controller.storage.read([user_id]);
                             const userData = items[user_id] || {};
-                            var userDateModified = userData;
                             // Add response to results in user data
-                            userDateModified.questionnaires[questionnaireIds.QNEU_ID].results[question['name']] = { code: answerOption['code'], value: response }
+                            userData.questionnaires[convo.vars.id].results[question['name']] = { code: answerOption['code'], value: response }
                             // Update current question in user data
-                            userDateModified.questionnaires[questionnaireIds.QNEU_ID].current_question = question['name']
+                            userData.questionnaires[convo.vars.id].current_question = question['name']
                             // Write updated user data to storage
-                            await controller.storage.write({ "test_user": userDateModified });
+                            await controller.storage.write({ "test_user": userData });
 
                             //convo.setVar(question['name'], { code: answerOption['code'], value: response })
 
@@ -220,10 +289,7 @@ module.exports = function (controller) {
 
                         break;
                 }
-
-
             })
-
 
             patterns.push({
                 default: true,
@@ -233,6 +299,20 @@ module.exports = function (controller) {
                     return await convo.repeat();
                 }
             });
+
+
+            // if ()
+            // // Pattern to reply last question
+            // patterns.push({
+            //     pattern: "Letzte Frage wiederholen",
+            //     handler: async (response, convo, bot) => {
+
+            //         if (previousThread) {
+            //             // Go to next thread
+            //             await convo.gotoThread(previousThread);
+            //         }
+            //     }
+            // });
 
 
             convo.addQuestion({
@@ -251,21 +331,37 @@ module.exports = function (controller) {
 
     });
 
-
+    // Add final message
+    convo.addMessage("Super {{ vars.name }}, das war es auch schon. Vielen Dank für das Beantworten der Fragen! Die Antworten werden jetzt von mir an unseren Server übertragen. Die Informationen helfen uns bei der Erforschung der perinatalen Prägung enorm.", "end_thread")
 
 
     // log all variables when dialog is completed
     convo.after(async (results, bot) => {
-        // Check if all fields of questionnaire are field and mark questionnaire as done if so.
-        // If not all fields are marked, redo questionnaire
-        // handle results.name, results.age, results.color
-        console.log("Testfragebogen finished")
-        console.log(results);
 
-        // TODO: If everything successfull: Remove questionnaire from queue
+        // TODO: Check if all fields of questionnaire are field and mark questionnaire as done if so.
+        // If not all fields are marked, redo questionnaire
+
+        // Access user data from DB
+        const items = await controller.storage.read([results.user]);
+        const userData = items[results.user] || {}
+
+        // Set questionnaire state to finished
+        userData.questionnaires[results.id].state = "finished";
+
+        // Remove questionnaire from queue
+        var index = userData.queue.indexOf(results.id);
+        if (index > -1) {
+            userData.queue.splice(index, 1);
+        }
+
+        // Write updated user data to database
+        await controller.storage.write({ "test_user": userData });
+
+        console.log(`Dialog ${results.id} ended. All data transferred to database`)
 
         // TODO: Go to dialog "after_questionnaire" -> e.g. "Kann ich sonst noch etwas für dich tun username?"
         //await bot.beginDialog('after_questionnaire');
+
     });
 
     // Add questionnaire to controller

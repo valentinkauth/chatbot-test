@@ -439,12 +439,12 @@
 				"category": "Ernährung"
 			},
 			{
-				"item": "An wie vielen Tagen in der Woche und wie lange hast Du die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Zu Fuß zur Arbeit gehen (auch längere Teilstrecken)",
+				"item": "An wie vielen Tagen in der Woche hast Du die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Zu Fuß zur Arbeit gehen (auch längere Teilstrecken)",
 				"answer_options": {
 					"answer_option": [
 						{
 							"code": "0",
-							"text": "nicht gemacht"
+							"text": "überhaupt nicht gemacht"
 						},
 						{
 							"code": "-96",
@@ -465,7 +465,7 @@
 				"category": "Bewegung"
 			},
 			{
-				"item": "An wie vielen Tagen in der Woche und wie lange haben Sie die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Zu Fuß zur Arbeit gehen (auch längere Teilstrecken)",
+				"item": "Für wie viele Minuten pro Tag hast Du die folgenden Aktivitäten in den letzten 4 Wochen ausgeübt? Zu Fuß zur Arbeit gehen (auch längere Teilstrecken)",
 				"answer_options": {
 					"answer_option": [
 						{
@@ -490,7 +490,7 @@
 				"answer_options": {
 					"answer_option": [{
 						"code": "-95",
-						"text": "# mal die Woche "
+						"text": "# mal die Woche"
 					}],
 					"state": "freetext"
 				},
