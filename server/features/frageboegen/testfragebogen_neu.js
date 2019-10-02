@@ -64,6 +64,9 @@ module.exports = function (controller) {
         // TODO: Instead of manually setting the user, use the pre-defined constants (currently not working)
         await controller.storage.write({ "test_user": userData });
 
+        // Always reset previous question at restart of questionnaire
+        convo.setVar("previousThread", null);
+
         // Start conversation with current question
         convo.gotoThread(current_question);
     });
@@ -136,6 +139,25 @@ module.exports = function (controller) {
             }
 
 
+            // // Add pattern that leads to previous thread
+            // if (previousThread) {
+            //     // Pattern to reply last question
+
+            //     console.log("pattern pushed")
+
+            //     patterns.push({
+            //         pattern: "repeat",
+            //         handler: async (response, convo, bot) => {
+            //             await convo.gotoThread(previousThread);
+            //         }
+            //     });
+            // }
+            // // Update previous thread
+            // previousThread = threadName;
+
+            // convo.setVar('previousThread', null)
+
+
             answerOptionsSorted.forEach(answerOption => {
 
                 switch (answerOption['code']) {
@@ -163,6 +185,9 @@ module.exports = function (controller) {
                                 await controller.storage.write({ "test_user": userData });
 
                                 console.log(nextThread)
+
+                                // Set current thread as previous thread before leaving it
+                                convo.setVar("previousThread", threadName);
 
                                 // Go to next thread
                                 await convo.gotoThread(nextThread);
@@ -199,6 +224,9 @@ module.exports = function (controller) {
                             // Write updated user data to storage
                             await controller.storage.write({ "test_user": userData });
 
+                            // Set current thread as previous thread before leaving it
+                            convo.setVar("previousThread", threadName);
+
                             // Go to next thread
                             await convo.gotoThread(nextThread);
                         }
@@ -229,6 +257,9 @@ module.exports = function (controller) {
                                 // Write updated user data to storage
                                 await controller.storage.write({ "test_user": userData });
 
+                                // Set current thread as previous thread before leaving it
+                                convo.setVar("previousThread", threadName);
+
                                 // Go to next thread
                                 await convo.gotoThread(nextThread);
 
@@ -256,7 +287,7 @@ module.exports = function (controller) {
                         function escapeStringRegExp(str) {
                             return str.replace(escapeStringRegExp.matchOperatorsRe, '\\$&');
                         }
-                        
+
                         var pattern = new RegExp(escapeStringRegExp(answerOption['text']))
 
                         var type = 'string'
@@ -275,7 +306,8 @@ module.exports = function (controller) {
                             // Write updated user data to storage
                             await controller.storage.write({ "test_user": userData });
 
-                            //convo.setVar(question['name'], { code: answerOption['code'], value: response })
+                            // Set current thread as previous thread before leaving it
+                            convo.setVar("previousThread", threadName);
 
                             // Go to next thread
                             await convo.gotoThread(nextThread);
@@ -300,19 +332,25 @@ module.exports = function (controller) {
                 }
             });
 
+            
+            // Add quick reply to repeat last question
+            if (!(threadName === "default")) {
+                
+                replies.push({ title: "Repeat", payload: "repeat last" })
 
-            // if ()
-            // // Pattern to reply last question
-            // patterns.push({
-            //     pattern: "Letzte Frage wiederholen",
-            //     handler: async (response, convo, bot) => {
+                patterns.push({
+                    hanlder: "repeat last",
+                    handler: async (response, convo, bot) => {
 
-            //         if (previousThread) {
-            //             // Go to next thread
-            //             await convo.gotoThread(previousThread);
-            //         }
-            //     }
-            // });
+                        console.log(threadName);
+                        console.log(convo.vars.previousThread)
+
+                        await convo.gotoThread(convo.vars.previousThread);
+                    }
+                });
+
+            }
+
 
 
             convo.addQuestion({

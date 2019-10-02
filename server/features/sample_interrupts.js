@@ -20,9 +20,4 @@ module.exports = function (controller) {
         await bot.reply(message, answerArray[Math.floor(Math.random() * answerArray.length)])
     });
 
-
-    controller.hears(['ernährung', 'essen'], 'message', async (bot, message) => {
-        await bot.say('Willst du Tipps oder Hilfe bezüglich deiner Ernähung')
-    });
-
 }

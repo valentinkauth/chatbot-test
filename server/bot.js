@@ -75,6 +75,7 @@ controller.ready(() => {
     controller.loadModules(__dirname + '/features/dialogs');
     controller.loadModules(__dirname + '/features/frageboegen');
     controller.loadModules(__dirname + '/features/ziele');
+    controller.loadModules(__dirname + '/features/ernaehrung');
     
 
     /* catch-all that uses the CMS to trigger dialogs */

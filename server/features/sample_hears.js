@@ -60,10 +60,5 @@ module.exports = function(controller) {
         await bot.reply(message, 'Ich zeige dir jetzt ein paar Übungen');
     });
 
-    // main menu: reply to exercises request
-    controller.hears(['ernaehrung', 'ernährung'],'message', async(bot, message) => {
-        await bot.reply(message, 'Ich gebe dir jetzt ein paar Ernährungstipps');
-    });
-
 
 }
