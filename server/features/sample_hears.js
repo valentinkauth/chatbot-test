@@ -25,34 +25,8 @@ module.exports = function(controller) {
     });
 
     // reply with user id
-    controller.hears(async(message) => message.text && message.text.toLowerCase() === 'f', ['message'], async(bot, message) => {
-        await bot.beginDialog('fragebogen_01');
-    });
-
-    // reply with user id
-    controller.hears(async(message) => message.text && message.text.toLowerCase() === 't', ['message'], async(bot, message) => {
-        await bot.beginDialog('testfragebogen');
-    });
-
-    // reply with user id
-    controller.hears(async(message) => message.text && message.text.toLowerCase() === 't2', ['message'], async(bot, message) => {
-        await bot.beginDialog('testfragebogen_neu');
-    });
-
-    // reply with user id
     controller.hears(async(message) => message.text && message.text.toLowerCase() === 's', ['message'], async(bot, message) => {
         await bot.beginDialog('sample_dialog');
-    });
-
-     // reply with user id
-     controller.hears('typing','message', async(bot, message) => {
-        await bot.say({ type: 'typing' });
-    });
-
-
-    // main menu: reply to goals request
-    controller.hears('ziele','message', async(bot, message) => {
-        await bot.reply(message, 'Ich zeige dir jetzt deine Ziele');
     });
 
     // main menu: reply to exercises request

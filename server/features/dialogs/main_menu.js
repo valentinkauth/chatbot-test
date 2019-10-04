@@ -3,13 +3,14 @@
  * Licensed under the MIT License.
  */
 const { BotkitConversation } = require("botkit");
+var emoji = require('node-emoji')
 
 
 module.exports = function (controller) {
 
     // Set variating greeting strings
     let greeting = ['Was kann ich heute für dich tun?', 'Was kann ich für dich tun?', 'Wie kann ich dir behilflich sein?'] 
-    let greeting2 = ['Klicke eine der Auswahlmöglichkeiten an oder schreibe mir direkt und ich versuche dir weiterzuhelfen! :)']
+    let greeting2 = ['Klicke eine der Auswahlmöglichkeiten an oder schreibe mir direkt und ich versuche dir weiterzuhelfen! ' + emoji.get('relieved')]
 
     const MY_DIALOG_ID = "main_menu";
 
@@ -23,29 +24,25 @@ module.exports = function (controller) {
         convo.setVar('main_menu', message)
     });
 
-    // TODO: Change main menu from ask to say conversation to not have a conversation open
     // TODO: offer pre-defined selections (and later enable free-text with intent analysis)
-
-
-    
 
     convo.say({
         text: '{{ vars.main_menu }}',
         quick_replies: [
             {
-                title: "Übungen",
+                title: "Übungen " + emoji.get('muscle'),
                 payload: "Übungen",
             },
             {
-                title: "Ernährungstipps",
+                title: "Ernährungstipps " + emoji.get('avocado'),
                 payload: "Ernährungstipps"
             },
             {
-                title: "Meine Ziele",
+                title: "Meine Ziele " + emoji.get('white_check_mark'),
                 payload: "Zeige mir meine Ziele"
             },
             {
-                title: "Regionale Angebote",
+                title: "Regionale Angebote " + emoji.get('earth_asia'),
                 payload: "Regionale Angebote"
             }
         ]

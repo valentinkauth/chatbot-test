@@ -460,7 +460,7 @@ var Botkit = {
             }
         });
 
-
+        // TODO: If quick reply text is "Repeat", create repeat button for previous message instead of quick reply
         that.on('message', function (message) {
             that.clearReplies();
             if (message.quick_replies) {
@@ -475,6 +475,12 @@ var Botkit = {
                         var el = document.createElement('a');
                         el.innerHTML = reply.title;
                         el.href = '#';
+
+                        if ('repeat' in reply) {
+                            if (reply.repeat) {
+                                el.style.cssText = 'background-color: red; color: white;';
+                            }
+                        }
 
                         el.onclick = function () {
                             that.quickReply(reply.payload);

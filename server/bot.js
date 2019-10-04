@@ -73,9 +73,10 @@ controller.ready(() => {
     // load traditional developer-created local custom feature modules
     controller.loadModules(__dirname + '/features');
     controller.loadModules(__dirname + '/features/dialogs');
-    controller.loadModules(__dirname + '/features/frageboegen');
-    controller.loadModules(__dirname + '/features/ziele');
-    controller.loadModules(__dirname + '/features/ernaehrung');
+    controller.loadModules(__dirname + '/features/questionnaires');
+    controller.loadModules(__dirname + '/features/goals');
+    controller.loadModules(__dirname + '/features/nutrition');
+    controller.loadModules(__dirname + '/features/exercises');
     
 
     /* catch-all that uses the CMS to trigger dialogs */
