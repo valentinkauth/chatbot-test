@@ -467,7 +467,7 @@ module.exports = function(controller) {
     console.log(`Dialog ${results.id} ended. All data transferred to database`);
 
     // TODO: Go to dialog "after_questionnaire" -> e.g. "Kann ich sonst noch etwas für dich tun username?"
-    //await bot.beginDialog('after_questionnaire');
+    await bot.beginDialog('main_menu_resume');
   });
 
   // Add questionnaire to controller
