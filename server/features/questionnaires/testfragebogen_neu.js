@@ -52,7 +52,7 @@ module.exports = function(controller) {
       userData.questionnaires[convo.vars.id] = {
         state: "incomplete",
         current_question: "default",
-        results: {}
+        results: []
       };
       // Set current question to default initially
       var current_question = "default";
@@ -65,10 +65,7 @@ module.exports = function(controller) {
 
     // Store updated user data in db
     // TODO: Instead of manually setting the user, use the pre-defined constants (currently not working)
-    await controller.storage.write({ test_user: userData });
-
-    // Always reset previous question at restart of questionnaire
-    convo.setVar("previousThread", null);
+    await controller.storage.write({ [convo.vars.user]: userData });
 
     // Start conversation with current question
     convo.gotoThread(current_question);
@@ -154,24 +151,6 @@ module.exports = function(controller) {
         nextThread = "end_thread";
       }
 
-      // // Add pattern that leads to previous thread
-      // if (previousThread) {
-      //     // Pattern to reply last question
-
-      //     console.log("pattern pushed")
-
-      //     patterns.push({
-      //         pattern: "repeat",
-      //         handler: async (response, convo, bot) => {
-      //             await convo.gotoThread(previousThread);
-      //         }
-      //     });
-      // }
-      // // Update previous thread
-      // previousThread = threadName;
-
-      // convo.setVar('previousThread', null)
-
       answerOptionsSorted.forEach(answerOption => {
         switch (answerOption["code"]) {
           // float: No quick reply button, handler checks for float
@@ -189,20 +168,17 @@ module.exports = function(controller) {
                 const items = await controller.storage.read([convo.vars.user]);
                 const userData = items[convo.vars.user] || {};
                 // Add response to results in user data
-                userData.questionnaires[convo.vars.id].results[
-                  question["name"]
-                ] = { code: answerOption["code"], value: response };
+                userData.questionnaires[convo.vars.id].results.push({
+                  id: question["name"],
+                  code: answerOption["code"],
+                  value: response
+                });
                 // Update current question in user data
-                userData.questionnaires[convo.vars.id].current_question =
-                  question["name"];
+                userData.questionnaires[
+                  convo.vars.id
+                ].current_question = nextThread;
                 // Write updated user data to storage
-                await controller.storage.write({ test_user: userData });
-
-                console.log(nextThread);
-
-                // Set current thread as previous thread before leaving it
-                convo.setVar("previousThread", threadName);
-
+                await controller.storage.write({ [convo.vars.user]: userData });
                 // Go to next thread
                 await convo.gotoThread(nextThread);
               } else {
@@ -232,18 +208,17 @@ module.exports = function(controller) {
               const items = await controller.storage.read([convo.vars.user]);
               const userData = items[convo.vars.user] || {};
               // Add response to results in user data
-              userData.questionnaires[convo.vars.id].results[
-                question["name"]
-              ] = { code: answerOption["code"], value: response };
+              userData.questionnaires[convo.vars.id].results.push({
+                id: question["name"],
+                code: answerOption["code"],
+                value: response
+              });
               // Update current question in user data
-              userData.questionnaires[convo.vars.id].current_question =
-                question["name"];
+              userData.questionnaires[
+                convo.vars.id
+              ].current_question = nextThread;
               // Write updated user data to storage
-              await controller.storage.write({ test_user: userData });
-
-              // Set current thread as previous thread before leaving it
-              convo.setVar("previousThread", threadName);
-
+              await controller.storage.write({ [convo.vars.user]: userData });
               // Go to next thread
               await convo.gotoThread(nextThread);
             };
@@ -267,18 +242,17 @@ module.exports = function(controller) {
                 const items = await controller.storage.read([convo.vars.user]);
                 const userData = items[convo.vars.user] || {};
                 // Add response to results in user data
-                userData.questionnaires[convo.vars.id].results[
-                  question["name"]
-                ] = { code: answerOption["code"], value: response };
+                userData.questionnaires[convo.vars.id].results.push({
+                  id: question["name"],
+                  code: answerOption["code"],
+                  value: response
+                });
                 // Update current question in user data
-                userData.questionnaires[convo.vars.id].current_question =
-                  question["name"];
+                userData.questionnaires[
+                  convo.vars.id
+                ].current_question = nextThread;
                 // Write updated user data to storage
-                await controller.storage.write({ test_user: userData });
-
-                // Set current thread as previous thread before leaving it
-                convo.setVar("previousThread", threadName);
-
+                await controller.storage.write({ [convo.vars.user]: userData });
                 // Go to next thread
                 await convo.gotoThread(nextThread);
               } else {
@@ -294,12 +268,11 @@ module.exports = function(controller) {
             patterns.push({ default: true, type: type, handler: handler });
 
             break;
+
           // Create quick reply button and corresponding handler, that reacts only on the specific string (question text)
           // This way we can display the text as the bots answer instead of the code/payload
           default:
             // In this case, the answer option is the pattern to look for
-
-            // TODO: Enable matching of answers with brackets
 
             // Convert string to regular expression, example from https://github.com/sindresorhus/escape-string-regexp
             escapeStringRegExp.matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
@@ -314,21 +287,20 @@ module.exports = function(controller) {
             var handler = async (response, convo, bot) => {
               // READ AND WRITE DB
               // Access user data from DB
-              let user_id = convo.vars.user;
-              const items = await controller.storage.read([user_id]);
-              const userData = items[user_id] || {};
+              const items = await controller.storage.read([convo.vars.user]);
+              const userData = items[convo.vars.user] || {};
               // Add response to results in user data
-              userData.questionnaires[convo.vars.id].results[
-                question["name"]
-              ] = { code: answerOption["code"], value: response };
+              userData.questionnaires[convo.vars.id].results.push({
+                id: question["name"],
+                code: answerOption["code"],
+                value: response
+              });
               // Update current question in user data
-              userData.questionnaires[convo.vars.id].current_question =
-                question["name"];
+              userData.questionnaires[
+                convo.vars.id
+              ].current_question = nextThread;
               // Write updated user data to storage
-              await controller.storage.write({ test_user: userData });
-
-              // Set current thread as previous thread before leaving it
-              convo.setVar("previousThread", threadName);
+              await controller.storage.write({ [convo.vars.user]: userData });
 
               // Update currentThread
               convo.setVar("currentThread", nextThread);
@@ -362,17 +334,68 @@ module.exports = function(controller) {
 
       // Add quick reply to repeat last question
       if (!(threadName === "default")) {
-        replies.push({ title: "Letzte Frage wiederholen", payload: "Letzte Frage wiederholen", repeat: true });
+        replies.push({
+          title: "Letzte Frage wiederholen",
+          payload: "Letzte Frage wiederholen",
+          repeat: true
+        });
 
         patterns.push({
           pattern: "Letzte Frage wiederholen",
           handler: async (response, convo, bot) => {
-            console.log(threadName);
-            console.log(convo.vars.previousThread);
+            const items = await controller.storage.read([convo.vars.user]);
+            const userData = items[convo.vars.user] || {};
 
+            var lastResult = userData.questionnaires[
+              convo.vars.id
+            ].results.pop();
 
+            // Check if there was an element found in the results array and the results array is not empty
+            if (lastResult != undefined && userData.questionnaires[
+              convo.vars.id
+            ].results.length > 0) {
+              // Update current question before going to its thread
+              userData.questionnaires[convo.vars.id].current_question =
+                lastResult.id;
+              // Update user data with cropped results array and new current question
+              await controller.storage.write({ [convo.vars.user]: userData });
+              // Go to question thread of last element found in results array
+              await convo.gotoThread(lastResult.id);
+            } else if (lastResult != undefined && userData.questionnaires[
+              convo.vars.id
+            ].results.length < 1) { 
+              // Update current question before going to its thread
+              userData.questionnaires[convo.vars.id].current_question = "default"
+              // Update user data with cropped results array and new current question
+              await controller.storage.write({ [convo.vars.user]: userData });
+              // Go to default thread if results array is empty
+              await convo.gotoThread("default");
+            } 
+            else {
+              await bot.say(
+                "Leider kann ich die letzte Frage nicht wiederholen."
+              );
+              await convo.repeat();
+            }
 
-            await convo.gotoThread(convo.vars.previousThread);
+            // if (userData.questionnaires[convo.vars.id]) {
+            //   // Use pop function to remove last element of answer array
+            //   var lastThread = userData.questionnaires[
+            //     convo.vars.id
+            //   ].results.pop();
+
+            //   await controller.storage.write({ [convo.vars.user]: userData });
+
+            //   console.log(lastThread.id);
+
+            //   await convo.gotoThread(lastThread.id);
+            // } else {
+            //   // Repeat question
+            //   await bot.say(
+            //     "Leider kann ich die letzte Frage nicht wiederholen."
+            //   );
+            //   await convo.repeat();
+            // }
           }
         });
       }
@@ -381,15 +404,15 @@ module.exports = function(controller) {
       patterns.push({
         pattern: "stop",
         handler: async (response, convo, bot) => {
-            
-            // Save last thread before going to the stopping thread
-            await convo.setVar("lastThread", convo.step.thread)
+          // Save last thread before going to the stopping thread
+          await convo.setVar("lastThread", convo.step.thread);
 
-            // Go to stopping thread
-            await convo.gotoThread("stop")
+          // Go to stopping thread
+          await convo.gotoThread("stop");
         }
       });
 
+      // Add question with message object, including quick replies, and all patterns to the corresponding thread name
       convo.addQuestion(
         {
           text: questionString,
@@ -399,8 +422,6 @@ module.exports = function(controller) {
         {},
         threadName
       );
-
-      //  console.log(questionString, replies, patterns, threadName)
     } else {
       console.log(
         "Element does not contain all informations: " + question + index
@@ -428,8 +449,8 @@ module.exports = function(controller) {
       {
         pattern: "Ja (funktioniert noch nicht richtig)",
         handler: async function(answer, convo, bot) {
-            // TODO: Find nicer way to end the dialog
-            await bot.beginDialog("main_menu");
+          // TODO: Find nicer way to end the dialog
+          await bot.beginDialog("main_menu");
         }
       }
     ],
@@ -462,12 +483,12 @@ module.exports = function(controller) {
     }
 
     // Write updated user data to database
-    await controller.storage.write({ test_user: userData });
+    await controller.storage.write({ [results.user]: userData });
 
     console.log(`Dialog ${results.id} ended. All data transferred to database`);
 
     // TODO: Go to dialog "after_questionnaire" -> e.g. "Kann ich sonst noch etwas für dich tun username?"
-    await bot.beginDialog('main_menu_resume');
+    await bot.beginDialog("main_menu_resume");
   });
 
   // Add questionnaire to controller
